@@ -1,0 +1,261 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f8f5" />
+  <title>Clinical Survival and Risk Factor Analysis | Francis Amoah Nuako</title>
+  <meta name="description" content="Survival analysis of the NCCTG lung cancer dataset (228 patients) using Kaplan-Meier estimation, the log-rank test, and Cox regression. Adjusted associations only, not causal effects or a clinical tool." />
+  <meta name="author" content="Francis Amoah Nuako" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://pcboss.me/projects/clinical-survival-analysis/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/styles.css" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Francis Amoah Nuako" />
+  <meta property="og:title" content="Clinical Survival and Risk Factor Analysis | Francis Amoah Nuako" />
+  <meta property="og:description" content="Survival analysis of the NCCTG lung cancer dataset (228 patients) using Kaplan-Meier estimation, the log-rank test, and Cox regression. Adjusted associations only, not causal effects or a clinical tool." />
+  <meta property="og:url" content="https://pcboss.me/projects/clinical-survival-analysis/" />
+  <meta property="og:image" content="https://pcboss.me/projects/clinical-survival-analysis/figures/05_km_by_sex.png" />
+  <meta property="og:image:alt" content="Kaplan-Meier survival curves by sex for 228 NCCTG lung cancer patients. The female curve sits above the male curve. Median survival is 426 days for female patients and 270 days for male patients." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Clinical Survival and Risk Factor Analysis | Francis Amoah Nuako" />
+  <meta name="twitter:description" content="Survival analysis of the NCCTG lung cancer dataset (228 patients) using Kaplan-Meier estimation, the log-rank test, and Cox regression. Adjusted associations only, not causal effects or a clinical tool." />
+  <meta name="twitter:url" content="https://pcboss.me/projects/clinical-survival-analysis/" />
+  <meta name="twitter:image" content="https://pcboss.me/projects/clinical-survival-analysis/figures/05_km_by_sex.png" />
+  <meta name="twitter:image:alt" content="Kaplan-Meier survival curves by sex for 228 NCCTG lung cancer patients. The female curve sits above the male curve. Median survival is 426 days for female patients and 270 days for male patients." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Clinical Survival and Risk Factor Analysis",
+    "description": "Kaplan-Meier estimation, log-rank testing, and Cox proportional hazards regression on the NCCTG lung cancer dataset distributed with lifelines.",
+    "url": "https://pcboss.me/projects/clinical-survival-analysis/",
+    "author": {
+      "@type": "Person",
+      "name": "Francis Amoah Nuako",
+      "url": "https://pcboss.me"
+    },
+    "isBasedOn": "https://lifelines.readthedocs.io/en/latest/lifelines.datasets.html"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="shell nav-row">
+      <a href="/" class="brand" aria-label="Francis Amoah Nuako, home"><span class="brand-mark">F<span>.</span></span><span class="brand-name">FRANCIS AMOAH NUAKO</span></a>
+      <nav class="site-nav" aria-label="Main navigation" id="siteNav">
+        <a href="/#about">About</a>
+        <a href="/#work">Projects</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+      <a class="nav-contact" href="mailto:francisnuako@gmail.com">Let's connect <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="main" class="case">
+    <section class="section case-hero" aria-labelledby="project-title">
+      <div class="shell">
+        <p class="overline case-kicker">Independent project · Biostatistics and survival analysis</p>
+        <h1 id="project-title">Clinical Survival and Risk Factor Analysis</h1>
+        <p class="case-lead">An analysis of survival patterns in the NCCTG lung cancer dataset, using Kaplan-Meier estimation, the log-rank test, and Cox proportional hazards regression to examine how survival differs between groups and which clinical variables are associated with the hazard of death.</p>
+        <p class="case-note">Technologies: Python, Pandas, Lifelines, NumPy, Matplotlib, and Streamlit. This is an academic analysis of a historical trial dataset. Hazard ratios are adjusted associations, not causal effects, and the model is not a clinical decision tool.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/clinical-survival-analysis-source.zip">Download source code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="/#work">Back to projects</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" aria-label="Headline measurements">
+      <div class="stat-grid">
+        <div class="stat"><strong>228</strong><span>Patients in the dataset</span></div>
+        <div class="stat"><strong>165</strong><span>Deaths observed (events)</span></div>
+        <div class="stat"><strong>63</strong><span>Censored patients, 27.6 percent</span></div>
+        <div class="stat"><strong>310 days</strong><span>Median Kaplan-Meier survival, overall</span></div>
+        <div class="stat"><strong>168</strong><span>Complete cases in the Cox model</span></div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="overview-heading">
+      <div class="shell">
+        <h2 id="overview-heading">Overview</h2>
+        <p>The question is descriptive and associational: what do survival patterns look like in this cohort, and which recorded clinical variables are associated with survival time after adjusting for the others? The analysis uses standard biostatistical methods and reports uncertainty at each step.</p>
+        <p>Of the 228 patients, 165 died during follow-up (72.4 percent) and 63 were censored (27.6 percent), meaning their death was not observed in the study period. Observed follow-up time runs from 5 to 1022 days, with a median of 255.5 days. Patients were 138 male and 90 female. Mean age was 62.4 years (SD 9.1, range 39 to 82).</p>
+        <p>The reference repository <a href="https://github.com/AmiRaGaL/clinical-survival-analysis-dashboard" target="_blank" rel="noopener noreferrer">AmiRaGaL/clinical-survival-analysis-dashboard</a> (MIT License) was inspected for scope and method family before this work. This project is a separate implementation, and no code was copied from it.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="source-heading">
+      <div class="shell">
+        <h2 id="source-heading">Dataset source and attribution</h2>
+        <p>The data are the NCCTG Lung Cancer Survival Dataset, loaded at runtime with <code>lifelines.datasets.load_lung</code> from the lifelines Python package. No patient-level data file is published on this page or included in the source download. Only aggregate statistics and figures are shown.</p>
+        <p>Original study: Loprinzi CL, Laurie JA, Wieand HS, et al. Prospective evaluation of prognostic variables from patient-completed questionnaires. North Central Cancer Treatment Group. <em>Journal of Clinical Oncology</em>. 1994;12(3):601-607.</p>
+        <p>Statistical library: lifelines. Davidson-Pilon C. lifelines: survival analysis in Python. <em>Journal of Open Source Software</em>. 2019;4(40):1317.</p>
+        <p>Event coding was verified in code before analysis. The loaded <code>status</code> column contains only 0 and 1, with 1 treated as death and 0 as censoring, matching the lifelines distribution and the known totals of 165 deaths and 63 censored records. Some documentation of the original NCCTG data describes a different coding (1 for censored, 2 for dead). That coding is not present in the lifelines version used here, and the code raises an error if unexpected status values appear, rather than silently recoding the data.</p>
+        <p>Recorded variables are institution code, age, sex, ECOG performance score rated by the physician (<code>ph.ecog</code>, higher is worse), Karnofsky performance scores rated by the physician (<code>ph.karno</code>) and by the patient (<code>pat.karno</code>), calories consumed at meals (<code>meal.cal</code>), and weight loss in the previous six months (<code>wt.loss</code>).</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="cleaning-heading">
+      <div class="shell">
+        <h2 id="cleaning-heading">Data cleaning and missing values</h2>
+        <p>The loaded data were checked for the expected columns, the event coding described above, and the sex coding (1 for Male, 2 for Female in the source), which is labelled in code. Missing values were counted for every source column:</p>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <caption class="case-note">Missing values by variable, from results.json. Variables not listed here had no missing values. Time, status, age, and sex were complete.</caption>
+            <thead>
+              <tr><th scope="col">Variable</th><th scope="col">Missing records</th><th scope="col">Missing percent</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>meal.cal (calories consumed at meals)</td><td>47</td><td>20.61%</td></tr>
+              <tr><td>wt.loss (weight loss, previous six months)</td><td>14</td><td>6.14%</td></tr>
+              <tr><td>pat.karno (Karnofsky score, patient rated)</td><td>3</td><td>1.32%</td></tr>
+              <tr><td>inst (institution code)</td><td>1</td><td>0.44%</td></tr>
+              <tr><td>ph.karno (Karnofsky score, physician rated)</td><td>1</td><td>0.44%</td></tr>
+              <tr><td>ph.ecog (ECOG performance score)</td><td>1</td><td>0.44%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>No imputation was used. The Cox model uses complete case analysis: records with any missing value in the time, event, or covariate columns were excluded. That retained 168 of 228 records (121 of them events) and excluded 60. Because <code>meal.cal</code> alone is missing for about one in five patients, the complete case sample is much smaller than the full cohort, and it may differ from the full cohort if missingness is related to prognosis.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="km-heading">
+      <div class="shell">
+        <h2 id="km-heading">Kaplan-Meier survival estimation</h2>
+        <p>Kaplan-Meier estimation gives the survival curve for the whole cohort and for each sex, accounting for censored patients. Median survival is the time at which the estimated survival probability reaches 0.5.</p>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <caption class="case-note">Kaplan-Meier results from results.json. The overall median has a 95 percent confidence interval of 284 to 361 days.</caption>
+            <thead>
+              <tr><th scope="col">Group</th><th scope="col">Patients</th><th scope="col">Deaths</th><th scope="col">Median survival</th><th scope="col">Survival at 365 days</th><th scope="col">Survival at 730 days</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Overall</td><td>228</td><td>165</td><td>310 days</td><td>0.409</td><td>0.116</td></tr>
+              <tr><td>Male</td><td>138</td><td>112</td><td>270 days</td><td>0.336</td><td>0.078</td></tr>
+              <tr><td>Female</td><td>90</td><td>53</td><td>426 days</td><td>0.526</td><td>0.187</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Estimated survival falls steadily: about 41 percent of patients are estimated to survive beyond one year, and about 12 percent beyond two years. The female curve sits above the male curve across most of follow-up, and the female median (426 days) is 156 days longer than the male median (270 days). These are unadjusted group summaries. They do not show that sex itself causes the difference.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="logrank-heading">
+      <div class="shell">
+        <h2 id="logrank-heading">Survival comparison by sex and the log-rank test</h2>
+        <p>The log-rank test compares the full male and female survival curves, rather than a single time point, and tests whether the observed difference is compatible with identical survival in the two groups. For Male vs Female, the test statistic is 10.33 with a p-value of 0.0013. On a conventional 0.05 threshold, that is evidence against identical survival curves in this dataset.</p>
+        <p>The test is unadjusted. It does not account for age, performance scores, or any other difference between the groups, and it says nothing about why the curves differ. The adjusted comparison is the Cox model below.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="cox-heading">
+      <div class="shell">
+        <h2 id="cox-heading">Cox proportional hazards regression</h2>
+        <p>The Cox model was fitted on the 168 complete cases, with seven covariates: age (per year), female sex (Female vs Male), <code>ph.ecog</code>, <code>ph.karno</code>, <code>pat.karno</code>, <code>meal.cal</code>, and <code>wt.loss</code>. A hazard ratio above 1 means a higher estimated hazard of death for a one unit increase in that variable, holding the others constant. A ratio below 1 means a lower estimated hazard. These are adjusted associations in this dataset, not causal effects.</p>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <caption class="case-note">Cox proportional hazards results from results.json, fitted on 168 complete cases with 121 events. Concordance is 0.651, a descriptive summary for this sample, not a validated prediction claim.</caption>
+            <thead>
+              <tr><th scope="col">Variable</th><th scope="col">Hazard ratio</th><th scope="col">95% CI</th><th scope="col">p-value</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>age (per year)</td><td>1.011</td><td>0.988 to 1.034</td><td>0.3591</td></tr>
+              <tr><td>sex_female (Female vs Male)</td><td>0.576</td><td>0.389 to 0.855</td><td>0.0061</td></tr>
+              <tr><td>ph.ecog (ECOG performance score)</td><td>2.084</td><td>1.345 to 3.228</td><td>0.0010</td></tr>
+              <tr><td>ph.karno (Karnofsky, physician rated)</td><td>1.023</td><td>1.000 to 1.045</td><td>0.0457</td></tr>
+              <tr><td>pat.karno (Karnofsky, patient rated)</td><td>0.988</td><td>0.972 to 1.003</td><td>0.1232</td></tr>
+              <tr><td>meal.cal (calories at meals)</td><td>1.000</td><td>0.9995 to 1.0005</td><td>0.8979</td></tr>
+              <tr><td>wt.loss (weight loss, six months)</td><td>0.986</td><td>0.971 to 1.001</td><td>0.0652</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Two associations are clearly separated from 1 in this sample. Female patients have an estimated hazard 0.576 times that of male patients after adjustment (95% CI 0.389 to 0.855, p = 0.0061), which is consistent with the unadjusted curves. Each one point increase in the ECOG performance score, where higher means worse function, is associated with an estimated hazard 2.084 times higher (95% CI 1.345 to 3.228, p = 0.0010).</p>
+        <p>The physician rated Karnofsky score has a small hazard ratio of 1.023 per point (95% CI 1.000 to 1.045, p = 0.0457), with the interval just above 1. For age, the patient rated Karnofsky score, calories at meals, and weight loss, the confidence intervals include 1, so this dataset does not clearly separate their adjusted associations from no association. The per unit scale matters: <code>meal.cal</code> is measured in calories, so a hazard ratio of 1.000 per calorie is expected even if a larger calorie difference mattered, and this analysis does not rescale it.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="ph-heading">
+      <div class="shell">
+        <h2 id="ph-heading">Proportional hazards assumption</h2>
+        <p>The Cox model assumes each covariate's hazard ratio stays constant over time. This was checked with the lifelines proportional hazard test using a rank time transform, supported by scaled Schoenfeld residual plots.</p>
+        <p>One covariate falls below the 0.05 level: <code>meal.cal</code>, with a test statistic of 4.22 and p = 0.0399. That is a possible assumption concern, so its hazard ratio should be read with caution. In practice the concern has little effect on the conclusions, because the estimated <code>meal.cal</code> association is essentially 1 in any case. The remaining covariates are above 0.05: <code>ph.karno</code> (p = 0.0860), <code>sex_female</code> (p = 0.1507), age (p = 0.3897), <code>wt.loss</code> (p = 0.3996), <code>pat.karno</code> (p = 0.7239), and <code>ph.ecog</code> (p = 0.7493). With 168 records, these tests also have limited power, so a p-value above 0.05 is not proof that the assumption holds exactly.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="charts-heading">
+      <div class="shell">
+        <h2 id="charts-heading">Visualizations</h2>
+        <p>These eight figures were generated by the analysis from the 228 patient NCCTG dataset. They show aggregates, survival curves, and model summaries only.</p>
+        <div class="figure-list">
+          <figure>
+            <img src="figures/01_patient_characteristics.png" width="1635" height="536" alt="Three charts of patient characteristics. Age histograms overlap for male and female patients. A bar chart shows 138 male and 90 female patients. ECOG performance scores are concentrated at 0, 1, and 2, with very few at 3." />
+            <figcaption>Patient characteristics. The cohort has 138 male and 90 female patients, with overlapping age distributions. Most ECOG scores are 0, 1, or 2.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/02_missing_values.png" width="1185" height="555" alt="Horizontal bar chart of missing values by variable. Meal calories has 47 missing records, or 20.61 percent. Weight loss has 14, patient rated Karnofsky has 3, and institution code, physician Karnofsky, and ECOG have 1 each." />
+            <figcaption>Missing values by variable. <code>meal.cal</code> is missing for 47 patients (20.61 percent), far more than any other variable. This drives the smaller Cox sample.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/03_survival_censoring_distribution.png" width="1485" height="555" alt="Two charts of follow-up and outcome. A histogram of observed time by outcome shows deaths spread across follow-up and censored patients clustered at shorter times. A bar chart shows 165 deaths and 63 censored patients." />
+            <figcaption>Observed time and outcome counts. Of 228 patients, 165 died during follow-up and 63 were censored (27.6 percent).</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/04_km_overall.png" width="1185" height="735" alt="Overall Kaplan-Meier survival curve with a confidence band. Survival probability falls steadily from 1.0, crossing 0.5 near 310 days, and reaches about 0.12 at two years." />
+            <figcaption>Overall Kaplan-Meier survival. Median survival is 310 days (95% CI 284 to 361). Estimated survival is 0.409 at 365 days and 0.116 at 730 days.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/05_km_by_sex.png" width="1185" height="735" alt="Kaplan-Meier survival curves by sex with confidence bands. The orange female curve sits above the blue male curve. The chart title reports a log-rank p-value of 0.001311 and a test statistic of 10.33." />
+            <figcaption>Kaplan-Meier survival by sex. Median survival is 426 days for female patients and 270 days for male patients. Log-rank statistic 10.33, p = 0.0013. This is an unadjusted comparison.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/06_cox_hazard_ratios.png" width="1326" height="674" alt="Forest plot of Cox hazard ratios on a log scale with 95 percent confidence intervals. ECOG performance score is 2.084 to the right of 1. Female sex is 0.576 to the left. The other intervals touch or cross 1." />
+            <figcaption>Cox hazard ratios with 95 percent confidence intervals, from 168 complete cases. <code>ph.ecog</code> (2.084) and female sex (0.576) are the associations clearly separated from 1.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/07_schoenfeld_residuals.png" width="1635" height="1183" alt="Seven scatter plots of scaled Schoenfeld residuals against time, one per Cox covariate, each with a horizontal line at zero. The points are spread around the line without a strong common pattern." />
+            <figcaption>Scaled Schoenfeld residuals by covariate, used to check whether hazard ratios change over time. These plots support the formal test results below.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/08_ph_assumption_test.png" width="1185" height="585" alt="Horizontal bar chart of proportional hazards test p-values by covariate, with a dashed line at 0.05. Meal calories is the only bar below the line, at about 0.04. The other covariates range from about 0.09 to 0.75." />
+            <figcaption>Proportional hazards test p-values (rank transform). Only <code>meal.cal</code> (p = 0.0399) falls below 0.05, which flags a possible assumption concern for that covariate.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="limits-heading">
+      <div class="shell">
+        <h2 id="limits-heading">Limitations and conclusions</h2>
+        <ul>
+          <li>Small, historical trial cohort: 228 patients from a specific North Central Cancer Treatment Group study. Results do not represent current lung cancer treatment or outcomes.</li>
+          <li>Complete case analysis reduces the Cox sample from 228 to 168 patients. If missingness is related to prognosis, the adjusted estimates may be biased. No imputation was used, so this trade-off is visible rather than hidden.</li>
+          <li>All findings are observational associations. The sex and ECOG results do not show that either factor causes longer or shorter survival, and no treatment effect was estimated.</li>
+          <li>Performance scores such as ECOG and Karnofsky are coarse and partly subjective summaries, not precise measurements.</li>
+          <li>One proportional hazards test falls below 0.05 (<code>meal.cal</code>, p = 0.0399), and the tests have limited power at this sample size. Hazard ratios are best read as average associations over follow-up.</li>
+          <li>No competing risks analysis, interaction modelling, or external validation was performed. The concordance of 0.651 is a descriptive summary for this sample, not a validated prediction claim, and the model is not clinically validated.</li>
+        </ul>
+        <p>Within those limits, the analysis is complete and reproducible: the event coding was verified before use, missing data were counted and handled openly, survival was estimated overall and by sex with a formal group test, and the Cox model reports hazard ratios with confidence intervals alongside a check of its main assumption. The clearest findings are that female patients in this cohort survived longer than male patients, before and after adjustment, and that worse ECOG performance scores were associated with a higher hazard of death. Both are associations in one historical dataset.</p>
+        <p>The downloadable archive contains the Python implementation, the Streamlit dashboard, tests, requirements, machine readable results, figures, and the case study text. It does not contain raw patient-level data. The dataset is loaded at runtime from lifelines, and the attribution above applies to reuse of the results and figures. The project code is MIT licensed.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/clinical-survival-analysis-source.zip">Download source code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="https://lifelines.readthedocs.io/en/latest/lifelines.datasets.html" target="_blank" rel="noopener noreferrer">Dataset documentation <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <a class="footer-brand" href="/">F<span>.</span></a>
+      <span>© <span id="year">2026</span> Francis Amoah Nuako</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+  <script src="/script.js" defer></script>
+</body>
+</html>
