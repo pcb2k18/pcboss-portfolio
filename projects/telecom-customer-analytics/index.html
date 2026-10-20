@@ -1,0 +1,233 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f8f5" />
+  <title>Telecom Customer and Revenue Analytics | Francis Amoah Nuako</title>
+  <meta name="description" content="Descriptive analysis of a historical Kaggle telecommunications extract: cleaned customer profiles, weekly revenue, and devices. These are dataset observations, not live network statistics." />
+  <meta name="author" content="Francis Amoah Nuako" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://pcboss.me/projects/telecom-customer-analytics/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/styles.css" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Francis Amoah Nuako" />
+  <meta property="og:title" content="Telecom Customer and Revenue Analytics | Francis Amoah Nuako" />
+  <meta property="og:description" content="Descriptive analysis of a historical Kaggle telecommunications extract: cleaned customer profiles, weekly revenue, and devices. These are dataset observations, not live network statistics." />
+  <meta property="og:url" content="https://pcboss.me/projects/telecom-customer-analytics/" />
+  <meta property="og:image" content="https://pcboss.me/projects/telecom-customer-analytics/figures/weekly_revenue.png" />
+  <meta property="og:image:alt" content="Line chart of weekly revenue, in US dollars, for week numbers 22 through 35 in the local Kaggle telecommunications extract." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Telecom Customer and Revenue Analytics | Francis Amoah Nuako" />
+  <meta name="twitter:description" content="Descriptive analysis of a historical Kaggle telecommunications extract: cleaned customer profiles, weekly revenue, and devices. These are dataset observations, not live network statistics." />
+  <meta name="twitter:url" content="https://pcboss.me/projects/telecom-customer-analytics/" />
+  <meta name="twitter:image" content="https://pcboss.me/projects/telecom-customer-analytics/figures/weekly_revenue.png" />
+  <meta name="twitter:image:alt" content="Line chart of weekly revenue, in US dollars, for week numbers 22 through 35 in the local Kaggle telecommunications extract." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Telecom Customer and Revenue Analytics",
+    "description": "Descriptive analysis of a historical public telecommunications extract covering customer profiles, weekly revenue, and devices.",
+    "url": "https://pcboss.me/projects/telecom-customer-analytics/",
+    "author": {
+      "@type": "Person",
+      "name": "Francis Amoah Nuako",
+      "url": "https://pcboss.me"
+    },
+    "isBasedOn": "https://www.kaggle.com/datasets/krishnacheedella/telecom-iot-crm-dataset"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="shell nav-row">
+      <a href="/" class="brand" aria-label="Francis Amoah Nuako — home"><span class="brand-mark">F<span>.</span></span><span class="brand-name">FRANCIS AMOAH NUAKO</span></a>
+      <nav class="site-nav" aria-label="Main navigation" id="siteNav">
+        <a href="/#about">About</a>
+        <a href="/#work">Projects</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+      <a class="nav-contact" href="mailto:francisnuako@gmail.com">Let's connect <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="main" class="case">
+    <section class="section case-hero" aria-labelledby="project-title">
+      <div class="shell">
+        <p class="overline case-kicker">Independent project · Descriptive analytics</p>
+        <h1 id="project-title">Telecom Customer and Revenue Analytics</h1>
+        <p class="case-lead">A descriptive analysis of a public telecommunications extract: customer profiles, weekly revenue, and registered devices. Python loads the files. DuckDB runs the cleaning and analytical SQL. Pandas computes week-to-week change, and Matplotlib draws the charts. No predictive model was trained.</p>
+        <p class="case-note">The totals below are historical observations from this local Kaggle extract. They are not live telecom statistics, a forecast, or a claim about any operating network.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/telecom-customer-analytics-source.zip">Download source code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="/#work">Back to projects</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" aria-label="Headline measurements">
+      <div class="stat-grid">
+        <div class="stat"><strong>11,249,351</strong><span>Cleaned customer profiles</span></div>
+        <div class="stat"><strong>1,704,601</strong><span>Revenue records kept</span></div>
+        <div class="stat"><strong>2,440,100</strong><span>Device records</span></div>
+        <div class="stat"><strong>$19,300,750</strong><span>Total revenue in the observed weeks</span></div>
+        <div class="stat"><strong>28.7%</strong><span>Of revenue unmatched to a CRM profile</span></div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="overview-heading">
+      <div class="shell">
+        <h2 id="overview-heading">Overview</h2>
+        <p>The measured population is the local extract itself, not a sample drawn from it. After cleaning, it contains 11,249,351 customer profiles, 1,704,601 revenue rows, and 2,440,100 device rows. Revenue in the observed weeks totals 19,300,750.00 USD. The weekly, mobile-type, gender, age-band, and device-link tables each sum to that same revenue total and the same 1,704,601 revenue rows.</p>
+        <p>In every observed week, the number of revenue rows equals the number of distinct paying customers. The extract contains one revenue row per customer per week. There are 143,731 paying customers. The average transaction is 11.32 USD, and revenue per paying customer is 134.28 USD.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="source-heading">
+      <div class="shell">
+        <h2 id="source-heading">Dataset</h2>
+        <p>The files are the public Kaggle dataset <a href="https://www.kaggle.com/datasets/krishnacheedella/telecom-iot-crm-dataset" target="_blank" rel="noopener noreferrer">Telecom IOT, Customer and Revenue Dataset</a> by Krishna Cheedella (<code>krishnacheedella/telecom-iot-crm-dataset</code>). Kaggle lists the license as CC0: Public Domain. The raw CSV files are not published with this page.</p>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <caption class="case-note">Rows read from the local extract.</caption>
+            <thead>
+              <tr><th scope="col">File</th><th scope="col">Role</th><th scope="col">Rows read</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>crm1.csv</td><td>Customer profile</td><td>13,627,493</td></tr>
+              <tr><td>rev1.csv</td><td>Weekly revenue</td><td>1,704,601</td></tr>
+              <tr><td>device1.csv</td><td>Device inventory</td><td>2,440,100</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The shared key is a customer identifier. In this extract every paying identifier is a 32-character hexadecimal string. No raw identifier is shown here. The revenue file has a week number and an amount in USD. It does not contain a calendar year. The device file has brand, model, operating system, vendor, and an IMEI type-allocation field. The Kaggle description calls that field a location. A type-allocation code ordinarily identifies a handset model, so this study does not map it to a place.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="method-heading">
+      <div class="shell">
+        <h2 id="method-heading">Cleaning and processing</h2>
+        <p>All source columns were read as text so that a birth year would remain an integer year. Revenue that cannot be joined to a CRM profile is kept and labeled unmatched. It is not dropped, and it is not assigned to prepaid, postpaid, a gender, or an age band.</p>
+        <ul>
+          <li>Customer identifiers were trimmed and uppercased. Empty identifiers were removed. None were empty in this extract.</li>
+          <li>Gender was mapped to male, female, or unknown. Blank values and values other than male or female, including “Not Available,” remain unknown.</li>
+          <li>Birth year was kept only when it was a four-digit integer from 1900 through 2015. Other values stayed null and were not imputed.</li>
+          <li>Service status, mobile type, and value segment were standardized. Prepaid and postpaid spellings were collapsed. An empty mobile type or segment became unknown.</li>
+          <li>CRM rows were reduced to one profile per identifier, preferring an active status, then a known gender, then a known birth year. This removed 2,378,142 duplicate CRM rows and left 11,249,351 profiles.</li>
+          <li>Revenue was rounded to cents. A row was kept when it had an identifier, an amount, and a week number from 1 to 53. No revenue row failed those rules, and none had a negative amount.</li>
+          <li>Device fields were uppercased. Exact duplicate device rows were collapsed. No device row lacked an identifier, and the cleaned device count remained 2,440,100.</li>
+        </ul>
+        <p>Age is 2026 minus year of birth. That reference year is an assumption. The source provides a week number and no transaction year. Brand revenue is reported only for customers with exactly one cleaned device row, so one payment is not given to every handset.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="findings-heading">
+      <div class="shell">
+        <h2 id="findings-heading">Findings</h2>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <caption class="case-note">Scale of the cleaned extract.</caption>
+            <thead>
+              <tr><th scope="col">Measure</th><th scope="col">Value</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>CRM rows read</td><td>13,627,493</td></tr>
+              <tr><td>CRM profiles after deduplication</td><td>11,249,351</td></tr>
+              <tr><td>Revenue rows kept</td><td>1,704,601</td></tr>
+              <tr><td>Paying customers</td><td>143,731</td></tr>
+              <tr><td>Device rows</td><td>2,440,100</td></tr>
+              <tr><td>Customers with a device row</td><td>2,381,966</td></tr>
+              <tr><td>Total revenue</td><td>19,300,750.00 USD</td></tr>
+              <tr><td>Average transaction</td><td>11.32 USD</td></tr>
+              <tr><td>Revenue per paying customer</td><td>134.28 USD</td></tr>
+            </tbody>
+          </table>
+        </div>
+
+        <h3>Weeks 22–35</h3>
+        <p>The file contains fourteen consecutive week numbers, 22 through 35. Weekly revenue moves from 1,131,490.32 USD in week 22 to 1,609,812.59 USD in week 35, a difference of 478,322.27 USD, or 42.3 percent. The path is not a straight line. Week 25 falls to 1,204,058.43 USD after week 24, and the highest week is week 34 at 1,644,656.74 USD. Paying customers move from 105,047 in week 22 to 135,274 in week 35.</p>
+        <p>Of 143,731 paying customers, 77,741 (54.1 percent) have a revenue row in all fourteen weeks. Only 560 customers appear in a single week. The 42.3 percent comparison is the change from the first observed week to the last, not a fitted growth rate.</p>
+
+        <h3>Revenue without a CRM profile</h3>
+        <p>Of the 19,300,750.00 USD, 13,765,352.68 USD (71.3 percent) joins to a CRM profile and 5,535,397.32 USD (28.7 percent) does not. The matched amount comes from 97,351 customers and 1,188,888 transactions. The unmatched amount comes from 46,380 customers and 515,713 transactions. Those 97,351 matched payers are 0.87 percent of the 11,249,351 CRM profiles. The CRM file is much larger than the set of customers who have revenue in weeks 22–35.</p>
+        <p>The 46,380 unmatched paying identifiers do not occur anywhere in the CRM file, either before or after deduplication. Trimming and uppercasing produce no additional matches. All matched and unmatched payers use a 32-character hexadecimal identifier, and the same gap is present in every week from 22 to 35. Unmatched revenue is between 26.7 and 30.1 percent of each week’s revenue. This is a coverage gap between the source tables, not a failure confined to one week and not an effect of removing duplicate CRM rows.</p>
+
+        <h3>Matched customer attributes</h3>
+        <p>Among matched revenue, prepaid accounts for 13,632,426.46 USD (99.0 percent of matched revenue) from 96,555 customers. Postpaid accounts for 132,926.22 USD from 796 customers. The postpaid average transaction is 12.83 USD, compared with 11.57 USD for prepaid. The postpaid group is small, so that difference describes this extract only.</p>
+        <p>Matched revenue by recorded gender is 11,139,751.36 USD for male (78,635 customers), 1,290,843.65 USD for female (9,331 customers), and 1,334,757.67 USD for unknown gender (9,385 customers). Unknown gender is about as large as the female total. In the full CRM table, 1,190,998 profiles (10.6 percent) have unknown gender. Value segment takes one value only, <code>TIER_3</code>, for all 11,249,351 profiles, so segment comparisons are not available. Service status is almost uniform: 11,247,484 profiles are active, 1,866 are suspended, and 1 is deactive.</p>
+        <p>Under the 2026 age assumption, matched revenue is concentrated in midlife bands: 5,366,095.07 USD at ages 35–44 and 3,653,747.71 USD at ages 45–54. Together those two bands are 65.5 percent of matched revenue. Ages 25–34 contribute 1,613,829.42 USD, ages 55–64 contribute 2,051,618.03 USD, and ages 65 and over contribute 1,079,452.45 USD. Under 25 and unknown birth year together contribute 610.00 USD, from four matched customers.</p>
+
+        <h3>Devices</h3>
+        <p>The device table has 2,440,100 rows and 2,381,966 distinct customers. Most of that inventory is not linked to a revenue row. Among revenue, 16,638,613.01 USD (86.2 percent) belongs to 123,687 paying customers with no device row. Another 2,604,466.46 USD belongs to 19,577 customers with exactly one device row. Customers with more than one device row account for 57,670.53 USD and 467 customers.</p>
+        <p>The ten largest brands by device row are led by Samsung (558,040 rows), Symphony (524,623), and Nokia (319,389). Those three brands are 57.5 percent of device rows. Brand revenue is reported only inside the single-device subset of 2,604,466.46 USD. In that subset the same three brands lead: Samsung 581,674.76 USD, Symphony 541,264.72 USD, and Nokia 434,251.73 USD. Those figures are not shares of the 19.3 million USD total.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="charts-heading">
+      <div class="shell">
+        <h2 id="charts-heading">Visualizations</h2>
+        <p>These five charts were produced by the analysis. Each one is labeled as the local Kaggle extract. They are not additional results beyond the tables above.</p>
+        <div class="figure-list">
+          <figure>
+            <img src="figures/weekly_revenue.png" width="960" height="540" alt="Line chart of revenue in US dollars by week number, from week 22 to week 35, in the local Kaggle CSV extract. Revenue rises overall, dips at week 25, peaks at week 34, and eases slightly in week 35." />
+            <figcaption>Weekly revenue for week numbers 22–35. The series moves from 1,131,490.32 USD in week 22 to 1,609,812.59 USD in week 35, with a fall in week 25 and a peak in week 34.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/revenue_by_mobile_type.png" width="960" height="576" alt="Horizontal bar chart of revenue by mobile type in the local Kaggle CSV extract. Prepaid is the longest bar, unmatched revenue is next, and postpaid is a very small bar." />
+            <figcaption>Revenue by mobile type. Unmatched payments, which have no CRM profile, are kept in their own bar rather than assigned to prepaid or postpaid. Postpaid is the small remainder of matched revenue.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/revenue_by_age_band.png" width="960" height="576" alt="Horizontal bar chart of revenue by age band, using 2026 minus birth year, in the local Kaggle CSV extract. Ages 35 to 44 and the unmatched group are the largest bars." />
+            <figcaption>Revenue by age band, using 2026 minus year of birth. Ages 35–44 and 45–54 hold most matched revenue. Unmatched revenue is plotted separately because those customers have no birth year on a CRM profile.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/revenue_by_device_link.png" width="960" height="576" alt="Horizontal bar chart of revenue by device-link status in the local Kaggle CSV extract. Customers with no device row account for most revenue. One device is much smaller, and multiple devices are barely visible." />
+            <figcaption>Revenue by device-link status. 16,638,613.01 USD belongs to paying customers with no device row. One device row accounts for 2,604,466.46 USD, and more than one device row accounts for 57,670.53 USD.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/device_brands.png" width="960" height="576" alt="Horizontal bar chart of device rows for the ten largest brands in the local Kaggle CSV extract. Samsung is largest, then Symphony, then Nokia, followed by smaller brands." />
+            <figcaption>Device rows for the ten largest brands, led by Samsung, Symphony, and Nokia. This chart counts device rows. It is not a share of the 19,300,750.00 USD revenue total.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="limits-heading">
+      <div class="shell">
+        <h2 id="limits-heading">Limitations</h2>
+        <ul>
+          <li>The results describe this extract. They are not a forecast, a causal estimate, or the output of a predictive model.</li>
+          <li>Week numbers run from 22 to 35, and the file has no calendar year. The 42.3 percent comparison is the change from the first observed week to the last, not a fitted growth rate.</li>
+          <li>Age bands depend on subtracting birth year from 2026. A different reference year would move the bands.</li>
+          <li>Value segment cannot be analyzed, because every CRM profile is <code>TIER_3</code>. Service status is likewise almost entirely active.</li>
+          <li>Gender is unknown for 10.6 percent of CRM profiles, and unknown-gender revenue is about as large as female revenue. Gender comparisons are incomplete.</li>
+          <li>28.7 percent of revenue has no CRM attributes. Assigning that amount to prepaid, postpaid, gender, or age would invent a profile. It is reported separately instead.</li>
+          <li>86.2 percent of revenue has no device row. Brand patterns describe the device table, and brand revenue describes only the single-device subset.</li>
+          <li>The postpaid average rests on 796 customers.</li>
+          <li>Identifiers are hashed. The study does not locate customers, and the IMEI type-allocation field is not treated as a geography.</li>
+          <li>The CRM deduplication rule is an analytical choice. It does not create the unmatched-revenue gap: those identifiers are absent from the CRM file before deduplication as well.</li>
+        </ul>
+        <p>The downloadable archive contains the Python and SQL implementation, tests, license, and reproduction instructions. It does not contain the raw Kaggle files, the generated database, or customer-level records. The included README still describes an earlier synthetic run. The totals on this page come from the later run that loaded the local Kaggle files. <code>REPRODUCE.md</code> in the archive explains that distinction: the synthetic command does not reproduce these totals.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/telecom-customer-analytics-source.zip">Download source code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="https://www.kaggle.com/datasets/krishnacheedella/telecom-iot-crm-dataset" target="_blank" rel="noopener noreferrer">Dataset source <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <a class="footer-brand" href="/">F<span>.</span></a>
+      <span>© <span id="year">2026</span> Francis Amoah Nuako</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+  <script src="/script.js" defer></script>
+</body>
+</html>
