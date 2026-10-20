@@ -1,0 +1,279 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f8f5" />
+  <title>Network Intrusion Detection and Traffic Analysis | Francis Amoah Nuako</title>
+  <meta name="description" content="Machine learning classification of CICIDS2017 network flows: 2,830,743 flows counted in full, four models compared on an 89,390 record cleaned sample, with a day based test on attack classes absent from training." />
+  <meta name="author" content="Francis Amoah Nuako" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://pcboss.me/projects/network-intrusion-detection/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/styles.css" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Francis Amoah Nuako" />
+  <meta property="og:title" content="Network Intrusion Detection and Traffic Analysis | Francis Amoah Nuako" />
+  <meta property="og:description" content="Machine learning classification of CICIDS2017 network flows: 2,830,743 flows counted in full, four models compared on an 89,390 record cleaned sample, with a day based test on attack classes absent from training." />
+  <meta property="og:url" content="https://pcboss.me/projects/network-intrusion-detection/" />
+  <meta property="og:image" content="https://pcboss.me/projects/network-intrusion-detection/figures/model_comparison.png" />
+  <meta property="og:image:alt" content="Grouped bar chart of stratified test accuracy, weighted F1, and macro F1 for Random Forest, Decision Tree, Logistic Regression, and K-Nearest Neighbors. Accuracy and weighted F1 are high for all models, while macro F1 is lower, especially for Logistic Regression." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Network Intrusion Detection and Traffic Analysis | Francis Amoah Nuako" />
+  <meta name="twitter:description" content="Machine learning classification of CICIDS2017 network flows: 2,830,743 flows counted in full, four models compared on an 89,390 record cleaned sample, with a day based test on attack classes absent from training." />
+  <meta name="twitter:url" content="https://pcboss.me/projects/network-intrusion-detection/" />
+  <meta name="twitter:image" content="https://pcboss.me/projects/network-intrusion-detection/figures/model_comparison.png" />
+  <meta name="twitter:image:alt" content="Grouped bar chart of stratified test accuracy, weighted F1, and macro F1 for Random Forest, Decision Tree, Logistic Regression, and K-Nearest Neighbors. Accuracy and weighted F1 are high for all models, while macro F1 is lower, especially for Logistic Regression." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Network Intrusion Detection and Traffic Analysis",
+    "description": "Classification of labelled CICIDS2017 network flows with four machine learning models, leakage controls, and a day based evaluation with unseen attack classes.",
+    "url": "https://pcboss.me/projects/network-intrusion-detection/",
+    "author": {
+      "@type": "Person",
+      "name": "Francis Amoah Nuako",
+      "url": "https://pcboss.me"
+    },
+    "isBasedOn": "https://www.unb.ca/cic/datasets/ids-2017.html"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="shell nav-row">
+      <a href="/" class="brand" aria-label="Francis Amoah Nuako, home"><span class="brand-mark">F<span>.</span></span><span class="brand-name">FRANCIS AMOAH NUAKO</span></a>
+      <nav class="site-nav" aria-label="Main navigation" id="siteNav">
+        <a href="/#about">About</a>
+        <a href="/#work">Projects</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+      <a class="nav-contact" href="mailto:francisnuako@gmail.com">Let's connect <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="main" class="case">
+    <section class="section case-hero" aria-labelledby="project-title">
+      <div class="shell">
+        <p class="overline case-kicker">Independent project · Network security and machine learning</p>
+        <h1 id="project-title">Network Intrusion Detection and Traffic Analysis</h1>
+        <p class="case-lead">An offline analysis of labelled network flows from CICIDS2017. Four classifiers were compared on their ability to separate benign traffic from malicious traffic and to name the attack category, and a second evaluation tested what happens when the test day contains attack types the model never saw in training.</p>
+        <p class="case-note">Technologies: Python, Pandas, NumPy, Scikit-learn, and Matplotlib. The full files contain 2,830,743 flows, but the models were trained and tested on a cleaned, capped sample of 89,390 records. Those two numbers describe different things, and the results below keep them separate. This is a benchmark study, not a validated production intrusion detection system.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/network-intrusion-detection-source.zip">Download source code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="/#work">Back to projects</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" aria-label="Headline measurements">
+      <div class="stat-grid">
+        <div class="stat"><strong>2,830,743</strong><span>Network flows counted across the full CICIDS2017 CSV files</span></div>
+        <div class="stat"><strong>89,390</strong><span>Cleaned records in the modelling sample</span></div>
+        <div class="stat"><strong>15</strong><span>Traffic classes: benign plus 14 attack categories</span></div>
+        <div class="stat"><strong>4</strong><span>Machine learning models compared</span></div>
+        <div class="stat"><strong>0.8928</strong><span>Best macro F1, Random Forest on the stratified test set</span></div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="overview-heading">
+      <div class="shell">
+        <h2 id="overview-heading">Overview</h2>
+        <p>The research question has three parts: how well can standard classifiers identify benign and malicious flows from CICFlowMeter flow statistics, which attack categories are hardest to detect, and how does performance change when the test day contains attack types that were absent from training?</p>
+        <p>Two evaluations answer different parts of that question. A stratified random split measures how well the models separate classes when training and test data are drawn from the same pooled sample. A day based split, training on Monday to Thursday and testing on Friday, measures something closer to deployment, where new traffic and new attacks arrive after training. The gap between the two results is a central finding of this project.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="source-heading">
+      <div class="shell">
+        <h2 id="source-heading">Dataset source and attribution</h2>
+        <p>The dataset is CICIDS2017, published by the Canadian Institute for Cybersecurity at the University of New Brunswick. Official source: <a href="https://www.unb.ca/cic/datasets/ids-2017.html" target="_blank" rel="noopener noreferrer">UNB CICIDS2017</a>. The publisher makes the dataset publicly available for researchers who cite the paper below. The CSV files used in this run came from a public mirror that reproduces the publisher licence notice (<a href="https://huggingface.co/datasets/c01dsnap/CIC-IDS2017" target="_blank" rel="noopener noreferrer">c01dsnap/CIC-IDS2017</a>). The official UNB page remains the authoritative source.</p>
+        <p>Required citation: Sharafaldin, I., Lashkari, A. H., and Ghorbani, A. A. (2018). Toward Generating a New Intrusion Detection Dataset and Intrusion Traffic Characterization. 4th International Conference on Information Systems Security and Privacy (ICISSP 2018).</p>
+        <p>Only the eight labelled flow CSV files were used. PCAP files were not downloaded or analysed, and no raw CSV or PCAP data is published on this page or included in the source download. The reference repository <a href="https://github.com/Hatem-Elashmawy/network-intrusion-detection-ml" target="_blank" rel="noopener noreferrer">Hatem-Elashmawy/network-intrusion-detection-ml</a> (MIT License) informed the task framing only. This project is an independent implementation, no code was copied from it, and none of its performance figures are reported here. See the NOTICE file in the download for the full attribution text.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="exploration-heading">
+      <div class="shell">
+        <h2 id="exploration-heading">Network traffic exploration and class imbalance</h2>
+        <p>Counting all eight files in full gives 2,830,743 flows: 2,273,097 benign (80.3 percent) and 557,646 malicious (19.7 percent). The 15 classes are extremely uneven. At the top, DoS Hulk has 231,073 flows, PortScan 158,930, and DDoS 128,027. In the middle, DoS GoldenEye (10,293), FTP-Patator (7,938), SSH-Patator (5,897), DoS slowloris (5,796), DoS Slowhttptest (5,499), Bot (1,966), and the web attacks (1,507 brute force, 652 XSS) are far smaller. At the bottom, Infiltration has 36 flows, Web Attack - Sql Injection 21, and Heartbleed 11.</p>
+        <p>That imbalance shapes everything that follows. A model can score high accuracy and weighted F1 by doing well on the large classes while failing on rare ones, which is why macro F1, which averages classes equally, is reported alongside them and used to select the best model. Rare attacks are difficult to detect for a simple reason: the model has very few examples to learn from, and the test set has very few to judge by. Heartbleed has 2 test records and Web Attack - Sql Injection has 4 in the stratified test set, so a single flow changes their scores sharply. Their per class figures are indicative, not stable estimates.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="cleaning-heading">
+      <div class="shell">
+        <h2 id="cleaning-heading">Data cleaning, sampling, and duplicate removal</h2>
+        <ul>
+          <li>Column names were trimmed, labels were normalised, and a repeated header column (<code>Fwd Header Length.1</code>) was dropped in each file.</li>
+          <li>A modelling sample was built by capping each class at 15,000 records, so that training was manageable on local hardware. Rare classes were kept in full. This capped sample, not the full 2.8 million flow distribution, is what all model metrics describe.</li>
+          <li>Exact duplicate feature rows were removed before splitting: 10,226 duplicates removed from 99,616 sampled rows, leaving 89,390 cleaned records with 69 features. Exact feature overlap between the train and test sets after de-duplication is 0.</li>
+          <li>Eight constant or all missing columns (the forward and backward average bulk rate, bytes per bulk, and packets per bulk columns, plus <code>Bwd PSH Flags</code> and <code>Bwd URG Flags</code>) were dropped.</li>
+          <li>Infinite values were replaced with missing values, and missing values were handled by median imputation fitted inside each model pipeline.</li>
+        </ul>
+        <p>The per class cap changes the class mix by design. In the modelling sample, BENIGN has 14,872 records, DDoS 14,999, and PortScan 13,752, while Heartbleed still has 11 and Web Attack - Sql Injection 21. Metrics on this sample cannot be read as performance on live traffic with a natural class distribution.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="method-heading">
+      <div class="shell">
+        <h2 id="method-heading">Machine learning methodology and leakage prevention</h2>
+        <p>Random Forest, Decision Tree, K-Nearest Neighbors, and Logistic Regression were compared on the same stratified 80/20 split (71,512 training rows, 17,878 test rows), stratified by label with <code>random_state</code> 42. No large hyperparameter search was used. Accuracy, weighted and macro precision, recall and F1, and per class scores were recorded for every model, with a confusion matrix for the best model by macro F1.</p>
+        <ul>
+          <li>Duplicates were removed before the split, so identical feature rows cannot appear in both training and test data. The recorded train and test exact feature overlap is 0.</li>
+          <li>Identifier columns were checked. The MachineLearningCSV files contain no Flow ID, source IP, destination IP, or timestamp columns, so there were no identifier features to drop, and the label was not used as a feature.</li>
+          <li>Imputation and scaling are inside each scikit-learn Pipeline and are fitted on training data only, so test rows cannot influence the values used to prepare them.</li>
+          <li>Highly correlated features were reported rather than silently removed. Ten feature pairs have an absolute correlation of at least 0.95 in the sample, several of them exactly 1.0, for example Total Fwd Packets with Subflow Fwd Packets. These are artefacts of how CICFlowMeter computes related statistics.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="results-heading">
+      <div class="shell">
+        <h2 id="results-heading">Model comparison on the stratified test set</h2>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <caption class="case-note">Stratified test results from results.json, on 17,878 test records from the capped modelling sample of 89,390. These scores do not describe the full 2,830,743 flow files.</caption>
+            <thead>
+              <tr><th scope="col">Model</th><th scope="col">Accuracy</th><th scope="col">Weighted F1</th><th scope="col">Macro F1</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Random Forest</td><td>0.9889</td><td>0.9886</td><td>0.8928</td></tr>
+              <tr><td>Decision Tree</td><td>0.9869</td><td>0.9876</td><td>0.8811</td></tr>
+              <tr><td>K-Nearest Neighbors</td><td>0.9808</td><td>0.9804</td><td>0.8550</td></tr>
+              <tr><td>Logistic Regression</td><td>0.9434</td><td>0.9509</td><td>0.7630</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The two tree based models lead, and Random Forest is the best model by macro F1. The ranking by accuracy is not the whole story: every model's macro F1 is well below its accuracy and weighted F1, because macro F1 gives the rare classes the same weight as BENIGN. Logistic Regression shows the widest gap, from 0.9434 accuracy to 0.7630 macro F1. That gap is the class imbalance appearing in the metrics.</p>
+        <p>Stratified random splits can give optimistic results, and this one should be read that way. Training and test rows are drawn from the same pooled sample, collected on the same five days in the same simulated testbed, so the test rows closely resemble the training rows. Real deployment separates training and test traffic in time, and attacks change. The day based evaluation below shows how much of this performance survives that separation.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="perclass-heading">
+      <div class="shell">
+        <h2 id="perclass-heading">Per-class attack detection results</h2>
+        <p>Per class results for the best model, Random Forest, on the stratified test set:</p>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <caption class="case-note">Random Forest per class results from results.json. Support is the number of test records for that class. Scores for classes with support in single figures are unstable and indicative only.</caption>
+            <thead>
+              <tr><th scope="col">Class</th><th scope="col">Precision</th><th scope="col">Recall</th><th scope="col">F1</th><th scope="col">Support</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>BENIGN</td><td>0.9903</td><td>0.9936</td><td>0.9919</td><td>2,974</td></tr>
+              <tr><td>Bot</td><td>0.9847</td><td>0.9898</td><td>0.9872</td><td>391</td></tr>
+              <tr><td>DDoS</td><td>0.9997</td><td>0.9997</td><td>0.9997</td><td>3,000</td></tr>
+              <tr><td>DoS GoldenEye</td><td>0.9971</td><td>0.9985</td><td>0.9978</td><td>2,057</td></tr>
+              <tr><td>DoS Hulk</td><td>0.9983</td><td>0.9961</td><td>0.9972</td><td>2,315</td></tr>
+              <tr><td>DoS Slowhttptest</td><td>0.9943</td><td>0.9981</td><td>0.9962</td><td>1,046</td></tr>
+              <tr><td>DoS slowloris</td><td>0.9981</td><td>0.9916</td><td>0.9949</td><td>1,077</td></tr>
+              <tr><td>FTP-Patator</td><td>0.9983</td><td>1.0000</td><td>0.9992</td><td>1,187</td></tr>
+              <tr><td>Heartbleed</td><td>1.0000</td><td>1.0000</td><td>1.0000</td><td>2</td></tr>
+              <tr><td>Infiltration</td><td>1.0000</td><td>0.8571</td><td>0.9231</td><td>7</td></tr>
+              <tr><td>PortScan</td><td>0.9996</td><td>0.9989</td><td>0.9993</td><td>2,750</td></tr>
+              <tr><td>SSH-Patator</td><td>0.9984</td><td>0.9969</td><td>0.9977</td><td>644</td></tr>
+              <tr><td>Web Attack - Brute Force</td><td>0.7429</td><td>0.7959</td><td>0.7685</td><td>294</td></tr>
+              <tr><td>Web Attack - Sql Injection</td><td>0.5000</td><td>0.2500</td><td>0.3333</td><td>4</td></tr>
+              <tr><td>Web Attack - XSS</td><td>0.4528</td><td>0.3692</td><td>0.4068</td><td>130</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>The well represented attack families (DDoS, the DoS variants, PortScan, both Patator classes, and Bot) are separated almost perfectly on this split. The web attacks are not: Web Attack - XSS has F1 0.4068 and Web Attack - Brute Force 0.7685, and most of their errors are confusion with each other and with BENIGN, as the confusion matrix shows. Web Attack - Sql Injection (F1 0.3333, recall 0.2500 on 4 test records) and Heartbleed (a perfect score on 2 test records) are too rare in the test set for their scores to mean much either way. That contrast, reliable scores where data are plentiful and unstable scores where they are not, is what macro F1 summarises.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="features-heading">
+      <div class="shell">
+        <h2 id="features-heading">Feature analysis</h2>
+        <p>The strongest Random Forest feature in this run is Destination Port, with impurity importance 0.066, followed by <code>Init_Win_bytes_backward</code> (0.056) and <code>Bwd Packets/s</code> (0.029). The remaining top features are packet length, header length, inter-arrival time, and flow rate statistics, each between about 0.020 and 0.026.</p>
+        <p>That ranking needs care. In a fixed testbed, each attack tool tends to target set ports and run from set hosts, so a port number can identify the experiment setup as much as any general property of attacks. On a real network, where services and attacks use different ports, that feature would carry less signal. Impurity importance also shows which features the trees split on, not which features cause attacks. Feature importance here is a description of this model on this dataset, not a causal explanation and not a detection rule.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="daybased-heading">
+      <div class="shell">
+        <h2 id="daybased-heading">Day based evaluation and unseen attacks</h2>
+        <p>CICIDS2017 was generated on a schedule: different attacks ran on different days. The second evaluation respects that structure. A Random Forest with the same preprocessing was trained on Monday to Thursday flows (52,998 records) and tested on Friday flows (36,392 records).</p>
+        <p>Friday contains three attack classes that never appear from Monday to Thursday: Bot, DDoS, and PortScan. Those classes account for 30,704 of the 36,392 Friday test rows, about 84 percent. The only Friday class the model was trained on is BENIGN, with 5,688 rows.</p>
+        <ul>
+          <li>A closed set classifier can only output labels it saw in training. It cannot predict Bot, DDoS, or PortScan, because those labels were never available to it. Every one of those 30,704 rows is therefore assigned to some other class. Accuracy across all Friday rows is 0.1558, and macro F1 is 0.0435.</li>
+          <li>On the 5,688 Friday rows whose class was seen in training, accuracy is 0.9967. That figure is often quoted out of context, so it needs stating plainly: those rows are all BENIGN. The number shows the model recognises Friday benign traffic well. It is not evidence of successful detection of unseen attacks, because no unseen attack row is in that subset, and none was detected as its true class.</li>
+          <li>The honest summary of the day based test is therefore two sided. Seen traffic is handled well, and unseen attack classes are missed entirely, by construction. A production system would need a way to flag traffic that matches no known class, rather than forcing it into one.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="charts-heading">
+      <div class="shell">
+        <h2 id="charts-heading">Visualizations</h2>
+        <p>These seven figures were generated by the analysis. The first two describe the full 2,830,743 flow files. The rest describe the capped modelling sample of 89,390 records and its test split.</p>
+        <div class="figure-list">
+          <figure>
+            <img src="figures/benign_vs_malicious.png" width="1241" height="698" alt="Bar chart of benign versus malicious traffic in the full CICIDS2017 CSV files. The green BENIGN bar shows 2,273,097 flows. The red malicious bar shows 557,646 flows." />
+            <figcaption>Benign versus malicious traffic in the full files. Of 2,830,743 flows, 2,273,097 are benign and 557,646 are malicious. These are full dataset counts, not the modelling sample.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/attack_category_distribution.png" width="1602" height="872" alt="Horizontal bar chart on a log scale of attack category counts in the full files. DoS Hulk, PortScan, and DDoS are the longest bars. Heartbleed, Web Attack - Sql Injection, and Infiltration are the shortest." />
+            <figcaption>Attack category distribution in the full files, on a log scale. The largest categories exceed 100,000 flows, while Heartbleed has 11. The log scale is needed to show both ends at once.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/feature_patterns.png" width="1601" height="877" alt="Horizontal bar chart of standardized mean differences between benign and malicious flows for ten flow features. Backward packet length minimum and minimum packet length are higher for benign traffic. PSH flag count is higher for malicious traffic." />
+            <figcaption>Flow feature patterns in the modelling sample, as standardized mean differences (benign minus malicious). Backward packet length statistics are higher for benign flows, and PSH flag count is higher for malicious flows. These are group averages, not detection rules.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/model_comparison.png" width="1601" height="878" alt="Grouped bar chart of stratified test accuracy, weighted F1, and macro F1 for the four models. Random Forest and Decision Tree have the tallest bars. Logistic Regression has the lowest macro F1 bar." />
+            <figcaption>Model comparison on the stratified test set (17,878 records from the capped sample). Accuracy and weighted F1 are high for all four models. Macro F1 is lower for each, and lowest for Logistic Regression, because it weights rare classes equally.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/confusion_matrix_best.png" width="1655" height="1418" alt="Row normalized confusion matrix for Random Forest on the stratified test set, with true classes as rows and predicted classes as columns. Most classes form a dark diagonal. Web Attack - XSS, Web Attack - Sql Injection, and Web Attack - Brute Force have visible off-diagonal cells." />
+            <figcaption>Random Forest confusion matrix, row normalized. Common classes sit on the diagonal. The visible errors are concentrated in the web attack classes, which are confused with each other and with benign traffic.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/feature_importance.png" width="1601" height="877" alt="Horizontal bar chart of the top 15 Random Forest impurity importances. Destination Port is first, then Init_Win_bytes_backward, then backward packets per second. The remaining bars are close in size." />
+            <figcaption>Random Forest feature importance. Destination Port (0.066) ranks first, which can reflect the fixed testbed setup as much as attack behaviour. Importance shows what the trees split on, not what causes attacks.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/per_class_performance.png" width="1781" height="1058" alt="Horizontal paired bar chart of Random Forest precision and recall by class. Most classes have both bars near 1.0. Web Attack - XSS, Web Attack - Sql Injection, and Web Attack - Brute Force have much shorter bars." />
+            <figcaption>Per class precision and recall for Random Forest. Twelve classes are near 1.0 on both measures. The three web attack classes fall well short, and the two rarest classes rest on 2 and 4 test records.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="limits-heading">
+      <div class="shell">
+        <h2 id="limits-heading">Limitations and conclusion</h2>
+        <ul>
+          <li>CICIDS2017 is a historical, simulated testbed dataset from July 2017. Traffic patterns, attack tools, and networks have changed since then, so these results do not demonstrate real world intrusion detection capability.</li>
+          <li>The modelling sample is capped at 15,000 records per class. Headline metrics describe that capped sample with its altered class mix, not the full 2.8 million flow distribution and not live traffic.</li>
+          <li>The stratified split draws training and test rows from the same pooled sample, which flatters the models. The day based split gives a less comfortable and more realistic picture.</li>
+          <li>Closed set classifiers cannot detect attack classes that were absent from training. On Friday, those classes were 84 percent of the test rows, and all of them were missed as their true class.</li>
+          <li>Rare classes remain rare after capping. Heartbleed, Infiltration, and the SQL injection class have 11 to 36 records in the full files, so their scores are indicative only.</li>
+          <li>Flow features are aggregated statistics. Payload content, host context, and operational alert triage are outside this analysis, and several flow features are near duplicates of each other.</li>
+          <li>Nothing here was tested against live traffic, alert workloads, false positive costs in an operations setting, or drift over time.</li>
+        </ul>
+        <p>On this historical dataset and capped sample, the tree based models separated most flow categories more reliably than the linear and distance based baselines, and Random Forest was strongest overall (accuracy 0.9889, macro F1 0.8928 on the stratified test set). The same project also shows why that score is not enough for an intrusion detection claim. Rare web attack categories were hard to classify even when they were in the training data, and attack classes that appear only on a later day cannot be named at all by a closed set model. This is an offline analysis of a public benchmark. It is not a validated production intrusion detection system, and it does not claim real world detection capability.</p>
+        <p>The downloadable archive contains the Python implementation, tests, requirements, README, NOTICE with the dataset attribution, machine readable results, the case study text, and these figures. It does not contain raw CSV files, PCAP files, credentials, or a virtual environment. The analysis code was written for this portfolio, and the dataset remains subject to the publisher terms cited above.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/network-intrusion-detection-source.zip">Download source code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="https://www.unb.ca/cic/datasets/ids-2017.html" target="_blank" rel="noopener noreferrer">Dataset source <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <a class="footer-brand" href="/">F<span>.</span></a>
+      <span>© <span id="year">2026</span> Francis Amoah Nuako</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+  <script src="/script.js" defer></script>
+</body>
+</html>
