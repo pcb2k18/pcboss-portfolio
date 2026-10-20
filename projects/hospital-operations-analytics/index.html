@@ -1,0 +1,241 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f8f5" />
+  <title>Hospital Operations and Patient Care Analytics | Francis Amoah Nuako</title>
+  <meta name="description" content="Analysis of a synthetic Faker hospital dataset: 54,860 cleaned admissions, length of stay, billing, and a classifier that did not beat chance. Not real patient data." />
+  <meta name="author" content="Francis Amoah Nuako" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://pcboss.me/projects/hospital-operations-analytics/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/styles.css" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Francis Amoah Nuako" />
+  <meta property="og:title" content="Hospital Operations and Patient Care Analytics | Francis Amoah Nuako" />
+  <meta property="og:description" content="Analysis of a synthetic Faker hospital dataset: 54,860 cleaned admissions, length of stay, billing, and a classifier that did not beat chance. Not real patient data." />
+  <meta property="og:url" content="https://pcboss.me/projects/hospital-operations-analytics/" />
+  <meta property="og:image" content="https://pcboss.me/projects/hospital-operations-analytics/figures/01_monthly_admissions.png" />
+  <meta property="og:image:alt" content="Line chart of monthly admissions in a synthetic hospital dataset, from May 2019 through May 2024." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Hospital Operations and Patient Care Analytics | Francis Amoah Nuako" />
+  <meta name="twitter:description" content="Analysis of a synthetic Faker hospital dataset: 54,860 cleaned admissions, length of stay, billing, and a classifier that did not beat chance. Not real patient data." />
+  <meta name="twitter:url" content="https://pcboss.me/projects/hospital-operations-analytics/" />
+  <meta name="twitter:image" content="https://pcboss.me/projects/hospital-operations-analytics/figures/01_monthly_admissions.png" />
+  <meta name="twitter:image:alt" content="Line chart of monthly admissions in a synthetic hospital dataset, from May 2019 through May 2024." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Hospital Operations and Patient Care Analytics",
+    "description": "Descriptive analysis and a prolonged-stay classification experiment on a synthetic hospital admissions file generated with Faker.",
+    "url": "https://pcboss.me/projects/hospital-operations-analytics/",
+    "author": {
+      "@type": "Person",
+      "name": "Francis Amoah Nuako",
+      "url": "https://pcboss.me"
+    },
+    "isBasedOn": "https://www.kaggle.com/datasets/prasad22/healthcare-dataset"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="shell nav-row">
+      <a href="/" class="brand" aria-label="Francis Amoah Nuako — home"><span class="brand-mark">F<span>.</span></span><span class="brand-name">FRANCIS AMOAH NUAKO</span></a>
+      <nav class="site-nav" aria-label="Main navigation" id="siteNav">
+        <a href="/#about">About</a>
+        <a href="/#work">Projects</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+      <a class="nav-contact" href="mailto:francisnuako@gmail.com">Let's connect <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="main" class="case">
+    <section class="section case-hero" aria-labelledby="project-title">
+      <div class="shell">
+        <p class="overline case-kicker">Independent project · Synthetic data</p>
+        <h1 id="project-title">Hospital Operations and Patient Care Analytics</h1>
+        <p class="case-lead">A cleaning, SQL, charting, and classification workflow on a public hospital-admissions file. Python and Pandas prepare the table. SQL writes the summaries. Scikit-learn fits a prolonged-stay logistic regression, and Streamlit can open the saved aggregates.</p>
+        <p class="case-note">This dataset is synthetic. The Kaggle author states that it was generated with Python’s Faker library and contains no real patient information. Nothing on this page is a clinical recommendation, a bed-demand estimate, or a description of a real hospital.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/hospital-operations-analytics-source.zip">Download source code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="/#work">Back to projects</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" aria-label="Headline measurements">
+      <div class="stat-grid">
+        <div class="stat"><strong>55,500</strong><span>Original records</span></div>
+        <div class="stat"><strong>54,860</strong><span>Records after cleaning</span></div>
+        <div class="stat"><strong>15.50 days</strong><span>Average length of stay</span></div>
+        <div class="stat"><strong>76.55%</strong><span>Of stays longer than 7 days</span></div>
+        <div class="stat"><strong>53.13%</strong><span>Of stays longer than 14 days</span></div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="overview-heading">
+      <div class="shell">
+        <h2 id="overview-heading">Overview</h2>
+        <p>The cleaned cohort has 54,860 admissions from 8 May 2019 through 7 May 2024, across 61 calendar months. Mean length of stay is 15.50 days and the median is 15.00 days. Observed stays run from 1 to 30 days. Mean age is 51.53 years, with observed ages from 13 to 89.</p>
+        <p>Category mixes are close to even. Gender shares run from 49.97% to 50.03%. Admission type, weekday, condition label, blood type, medication, and test-result shares each sit within a fraction of a percentage point of an equal split. Age is the exception: the tails are thin.</p>
+        <p>These measurements describe the synthetic file. They do not estimate bed demand, payment integrity, or clinical risk.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="source-heading">
+      <div class="shell">
+        <h2 id="source-heading">Dataset</h2>
+        <p>The file is version 2 of Prasad Patil’s Kaggle dataset <a href="https://www.kaggle.com/datasets/prasad22/healthcare-dataset" target="_blank" rel="noopener noreferrer">Healthcare Dataset</a> (<code>prasad22/healthcare-dataset</code>). Kaggle lists the license as CC0: Public Domain. The author’s description says the records were generated with Python’s Faker library and contain no real patient information.</p>
+        <p>The Kaggle file card still says the CSV contains 10,000 records. The downloaded version 2 file contains 55,500 rows and 15 columns. This analysis uses that measured file. The raw CSV is not published with this page. Patient names, doctor names, hospital names, and room numbers are dropped before the analysis table is written. Doctor and hospital labels are nearly row-unique, so they are not treated as a stable provider panel.</p>
+        <p>Citation: Patil, P. Healthcare Dataset (Version 2) [Data set]. Kaggle. https://www.kaggle.com/datasets/prasad22/healthcare-dataset</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="method-heading">
+      <div class="shell">
+        <h2 id="method-heading">Cleaning</h2>
+        <p>The raw file had no missing values. Cleaning kept a row only when the age and dates were valid, billed amount was present and not negative, and the category fields were not blank.</p>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <caption class="case-note">Rows removed or retained from the synthetic file.</caption>
+            <thead>
+              <tr><th scope="col">Check</th><th scope="col">Result</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Raw rows</td><td>55,500</td></tr>
+              <tr><td>Exact duplicate rows removed</td><td>534</td></tr>
+              <tr><td>Invalid age removed</td><td>0</td></tr>
+              <tr><td>Invalid dates removed</td><td>0</td></tr>
+              <tr><td>Negative or missing billed amounts removed</td><td>106</td></tr>
+              <tr><td>Blank categories removed</td><td>0</td></tr>
+              <tr><td>Rows retained</td><td>54,860</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Negative billed amounts were removed rather than interpreted. Exact duplicate rows were removed. Names are not used as an analysis key.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="demo-heading">
+      <div class="shell">
+        <h2 id="demo-heading">Patient demographics</h2>
+        <p>Age groups in the cleaned cohort are 0–17 (116 admissions, 0.21%), 18–39 (17,561, 32.01%), 40–64 (20,294, 36.99%), and 65+ (16,889, 30.79%). Mean length of stay by age group runs only from 15.32 to 15.58 days. The share of stays longer than 7 days by age group runs from 76.34% to 76.87%.</p>
+        <p>The most common age is 38, with 890 admissions. The least common ages are at the tails: 89 (8 admissions), 13 (14), and 14 (18). Pearson correlation between age and length of stay is 0.0080.</p>
+        <p>Condition labels have six levels, from 16.55% to 16.78% of admissions. Blood types have eight levels, from 12.37% to 12.54%. Gender is split about evenly. With tens of thousands of rows, a chi-square test can still reject an exact equal mix. The percentage-point gap is the useful description.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="stay-heading">
+      <div class="shell">
+        <h2 id="stay-heading">Admissions and hospital stays</h2>
+        <p>Monthly volume averages 899 admissions. Interior months range from 770 in February 2022 to 1,002 in August 2020. May 2019, the first partial month, has 672 admissions, and May 2024, the last partial month, has 212. The fitted slope across all months is −1.25 admissions per month.</p>
+        <p>Admission-type shares run from 32.94% to 33.61%. Weekday shares run from 14.15% to 14.39%. Mean stay by condition spans 15.43 to 15.68 days, and the share longer than 7 days by condition spans 76.03% to 77.03%. By admission type, mean stay spans 15.41 to 15.58 days.</p>
+        <p>A discrete uniform distribution on days 1 through 30 would put about 76.7% of stays above 7 days and 50% above 14 days. The measured shares, 76.55% and 53.13%, are close to those reference values. Against an equal count for every integer day from 1 to 30, the largest gap is 0.20 percentage points.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="billing-heading">
+      <div class="shell">
+        <h2 id="billing-heading">Billing and insurance</h2>
+        <p>The source does not name a currency, so billed amounts are reported as recorded numbers, not as dollars or another unit. After removing 106 negative amounts, retained values run from 9.24 to 52,764.28. The mean is 25,594.63. The midpoint of the observed minimum and maximum is 26,386.76.</p>
+        <p>Insurer mean billed amounts span only 219.20, from 25,458.89 to 25,678.09. The insurer mix has five levels, from 19.68% to 20.26%. Pearson correlation between billed amount and length of stay is −0.0048. Medication labels have five levels, from 19.93% to 20.08%. Test-result labels have three levels, from 33.10% to 33.54%.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="model-heading">
+      <div class="shell">
+        <h2 id="model-heading">Machine learning experiment</h2>
+        <p>Two labels were fixed before fitting: length of stay greater than 7 days, and length of stay greater than 14 days. The cuts were not chosen to maximize test AUC. Stay length in this file runs from 1 to 30 days in nearly equal counts, so the 7-day rule marks a large majority of rows and a majority-class rule is a strong accuracy baseline.</p>
+        <p>The classifier is an unweighted logistic regression inside a scikit-learn pipeline. Age is scaled, and the categorical fields are one-hot encoded, with the encoder fit on the training split only. The split is stratified, 80/20, with <code>random_state=42</code>. A class-weighted logistic regression is a pre-specified sensitivity check on the same split. It was not used to pick a winner after seeing the test set.</p>
+        <p>Admission-time features are age, gender, blood type, medical condition, admission type, insurance provider, admission month, and admission weekday. Length of stay, both dates, billed amount, medication, test result, and identifier fields are excluded so they cannot define or leak the label. The largest Cramér’s V with the 7-day label is 0.0140, for admission month. A value under 0.05 is a negligible association.</p>
+        <h3>Held-out results</h3>
+        <p>Each split has 43,888 training rows and 10,972 test rows. For stays longer than 7 days, the positive rate is 76.55% in training and 76.56% in test. For stays longer than 14 days, the positive rate is 53.13% in both splits.</p>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <caption class="case-note">Unweighted logistic regression on the held-out split. ROC-AUC near 0.50 is chance discrimination.</caption>
+            <thead>
+              <tr><th scope="col">Label</th><th scope="col">Accuracy</th><th scope="col">Majority-class accuracy</th><th scope="col">ROC-AUC</th><th scope="col">95% interval</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Stay &gt; 7 days</td><td>76.6%</td><td>76.6%</td><td>0.496</td><td>0.484 to 0.509</td></tr>
+              <tr><td>Stay &gt; 14 days</td><td>53.0%</td><td>53.1%</td><td>0.499</td><td>0.489 to 0.509</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Both ROC-AUC values sit at chance, and both 95% bootstrap intervals include 0.500. On the 7-day label, unweighted accuracy matches the majority-class accuracy. The unweighted model at probability 0.5 classifies essentially every 7-day test row as a long stay: 0 true negatives, 2,572 false positives, 0 false negatives, and 8,400 true positives. The class-weighted check has the same ROC-AUC, 0.496, and accuracy falls to 50.2%.</p>
+        <p>On the 14-day label, unweighted accuracy is 0.12 percentage points below the majority class. Its ROC-AUC is 0.499, and the class-weighted check has the same ROC-AUC. Train five-fold ROC-AUC is 0.497 for the 7-day label and 0.500 for the 14-day label.</p>
+        <p>The models did not outperform chance discrimination. They are not validated clinical predictors, and they are not a useful synthetic benchmark of predictive skill. One stratified split and training-set cross-validation are not an external validation. The ROC-AUC interval resamples the held-out predictions. It does not refit the model on each draw.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="charts-heading">
+      <div class="shell">
+        <h2 id="charts-heading">Visualizations</h2>
+        <p>These six charts were produced by the pipeline. Each one is labeled as synthetic data from the Kaggle file.</p>
+        <div class="figure-list">
+          <figure>
+            <img src="figures/01_monthly_admissions.png" width="1400" height="644" alt="Line chart of monthly admissions in the synthetic dataset, from May 2019 to May 2024. Volume stays near 900 for most months and drops in the final partial month." />
+            <figcaption>Monthly admissions from May 2019 through May 2024. Interior months range from 770 to 1,002. The first and last months are partial: 672 admissions in May 2019 and 212 in May 2024.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/02_admissions_by_age_and_gender.png" width="1120" height="644" alt="Grouped bar chart of synthetic admissions by age group and gender. Ages 0 to 17 are rare. Ages 18 to 39, 40 to 64, and 65 and over are large, with female and male bars nearly equal." />
+            <figcaption>Admissions by age group and gender. Ages 0–17 account for 116 admissions. The adult groups are large, and female and male counts are nearly equal in each group.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/03_length_of_stay.png" width="1190" height="644" alt="Histogram of length of stay from 1 to 30 days in the synthetic dataset. Bar heights are similar. Dashed lines mark stays longer than 7 days and longer than 14 days." />
+            <figcaption>Length of stay from 1 to 30 days. Counts are close to even across days. The dashed lines mark the pre-specified cuts at more than 7 days and more than 14 days.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/04_billing.png" width="1470" height="644" alt="Two charts of synthetic billed amounts with no currency unit. The left histogram spreads amounts across the observed range. The right chart shows similar mean billed amounts for five insurers." />
+            <figcaption>Billed amount, with no currency named in the source. Retained amounts run from 9.24 to 52,764.28. Mean billed amount is similar across the five insurer labels, spanning only 219.20.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/05_prolonged_stay_rates.png" width="1470" height="672" alt="Bar charts of the share of synthetic admissions with stays longer than 7 days and longer than 14 days, by medical condition and by admission type. The bars are nearly the same height in every group." />
+            <figcaption>Share of stays longer than 7 days and longer than 14 days, by condition label and by admission type. The rates barely move across groups, in line with the narrow spans reported above.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/06_prolonged_stay_roc.png" width="868" height="756" alt="Held-out ROC curves for the admission-time logistic regression. The curve for stays longer than 7 days has AUC 0.496, the curve for stays longer than 14 days has AUC 0.499, and both lie on the chance line at AUC 0.500." />
+            <figcaption>Held-out ROC curves for the admission-time model. AUC is 0.496 for stays longer than 7 days and 0.499 for stays longer than 14 days. Both curves lie on the chance line.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="limits-heading">
+      <div class="shell">
+        <h2 id="limits-heading">Limitations</h2>
+        <ul>
+          <li>The publisher describes the file as synthetic Faker output. It is not an extract from a hospital information system, and it is not real clinical patient data.</li>
+          <li>No currency unit, geography, or care setting is defined beyond the column names.</li>
+          <li>Negative billed amounts were removed rather than interpreted.</li>
+          <li>The labels called medical condition, insurer, medication, and test result behave like assigned categories. Doctor and hospital fields do not identify a usable panel.</li>
+          <li>Medication and test result were kept out of the classifier because the file does not say they were known at admission.</li>
+          <li>A different stay threshold would change the positive rate. The two reported cuts were pre-specified. Other cuts were not searched.</li>
+          <li>The ROC-AUC values, 0.496 and 0.499, do not outperform chance. The models are not validated clinical predictors.</li>
+        </ul>
+        <p>The downloadable archive contains the Python package, SQL scripts, Streamlit app, tests, requirements, and reproduction instructions. It does not contain the raw CSV, generated databases, or patient-level records.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/hospital-operations-analytics-source.zip">Download source code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="https://www.kaggle.com/datasets/prasad22/healthcare-dataset" target="_blank" rel="noopener noreferrer">Dataset source <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <a class="footer-brand" href="/">F<span>.</span></a>
+      <span>© <span id="year">2026</span> Francis Amoah Nuako</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+  <script src="/script.js" defer></script>
+</body>
+</html>
