@@ -1,0 +1,189 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f8f5" />
+  <title>Vision-Based Plant Health Assessment | Francis Amoah Nuako</title>
+  <meta name="description" content="A Streamlit and FastAPI app that sends a leaf photo to a pretrained Groq vision model for a cautious first look at visible symptoms. No model was trained, and disease accuracy is unverified." />
+  <meta name="author" content="Francis Amoah Nuako" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://pcboss.me/projects/vision-plant-health-assessment/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/styles.css" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Francis Amoah Nuako" />
+  <meta property="og:title" content="Vision-Based Plant Health Assessment | Francis Amoah Nuako" />
+  <meta property="og:description" content="A Streamlit and FastAPI app that sends a leaf photo to a pretrained Groq vision model for a cautious first look at visible symptoms. No model was trained, and disease accuracy is unverified." />
+  <meta property="og:url" content="https://pcboss.me/projects/vision-plant-health-assessment/" />
+  <meta property="og:image" content="https://pcboss.me/projects/vision-plant-health-assessment/figures/app-home.png" />
+  <meta property="og:image:alt" content="Screenshot of the plant health app. The sidebar shows demo mode selected and the Groq model name. The main area shows a leaf image upload control and a note that results are not verified diagnoses." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Vision-Based Plant Health Assessment | Francis Amoah Nuako" />
+  <meta name="twitter:description" content="A Streamlit and FastAPI app that sends a leaf photo to a pretrained Groq vision model for a cautious first look at visible symptoms. No model was trained, and disease accuracy is unverified." />
+  <meta name="twitter:url" content="https://pcboss.me/projects/vision-plant-health-assessment/" />
+  <meta name="twitter:image" content="https://pcboss.me/projects/vision-plant-health-assessment/figures/app-home.png" />
+  <meta name="twitter:image:alt" content="Screenshot of the plant health app. The sidebar shows demo mode selected and the Groq model name. The main area shows a leaf image upload control and a note that results are not verified diagnoses." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Vision-Based Plant Health Assessment",
+    "description": "A web application that uses a pretrained Groq vision model through an API to give a cautious first look at visible plant leaf symptoms.",
+    "url": "https://pcboss.me/projects/vision-plant-health-assessment/",
+    "author": {
+      "@type": "Person",
+      "name": "Francis Amoah Nuako",
+      "url": "https://pcboss.me"
+    },
+    "isBasedOn": "https://console.groq.com/docs/vision"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="shell nav-row">
+      <a href="/" class="brand" aria-label="Francis Amoah Nuako, home"><span class="brand-mark">F<span>.</span></span><span class="brand-name">FRANCIS AMOAH NUAKO</span></a>
+      <nav class="site-nav" aria-label="Main navigation" id="siteNav">
+        <a href="/#about">About</a>
+        <a href="/#work">Projects</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+      <a class="nav-contact" href="mailto:francisnuako@gmail.com">Let's connect <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="main" class="case">
+    <section class="section case-hero" aria-labelledby="project-title">
+      <div class="shell">
+        <p class="overline case-kicker">Independent project · Applied vision API</p>
+        <h1 id="project-title">Vision-Based Plant Health Assessment</h1>
+        <p class="case-lead">A small web app that accepts a plant leaf photo and returns a cautious first look at visible symptoms, possible severity, and general care steps. It uses a pretrained vision model through the Groq API. No model was trained or fine-tuned for this project.</p>
+        <p class="case-note">Every result is model-generated and is not a verified diagnosis. Confirm any concern with a qualified plant specialist, a local extension service, or a lab test.</p>
+        <p class="case-note"><strong>Live Demo Availability:</strong> A public live demo is not available, as this project does not have hosted API access for public use. You can download the source code below and run it on your own computer with your own Groq API key. Demo mode also works with no key.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/vision-plant-health-assessment-source.zip">Download Source Code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="/#work">Back to projects</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" aria-label="Headline facts">
+      <div class="stat-grid">
+        <div class="stat"><strong>qwen/qwen3.8-27b</strong><span>Pretrained Groq vision model, used through its API</span></div>
+        <div class="stat"><strong>0</strong><span>Models trained or fine-tuned for this project</span></div>
+        <div class="stat"><strong>2</strong><span>FastAPI endpoints: health check and assessment</span></div>
+        <div class="stat"><strong>13</strong><span>Automated tests passing, with mocked model responses</span></div>
+        <div class="stat"><strong>5 MB</strong><span>Default upload limit, configurable up to 20 MB</span></div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="overview-heading">
+      <div class="shell">
+        <h2 id="overview-heading">Overview</h2>
+        <p>Plant owners often notice spots, yellowing, or wilting without knowing how to describe what they see or what to check next. This app helps a user organise those observations from a photo, while stating clearly that the result is a first look, not a diagnosis.</p>
+        <p>The interface is built with Streamlit and the backend with FastAPI. A demo mode returns fixed mock output, so the full flow can be tried with no API key and no image sent to a model. Live mode sends the image to Groq and returns a structured result.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="model-heading">
+      <div class="shell">
+        <h2 id="model-heading">Model and API integration</h2>
+        <p>The system does not train, fine-tune, or evaluate a custom model. It calls a pretrained vision-language model hosted by Groq. The work in this project is the application around that model: image validation, prompt design, API integration, response parsing, the user interface, safety wording, and tests. No training data was collected and no model weights were created.</p>
+        <ul>
+          <li>Provider: Groq, using its OpenAI-compatible chat completions API through the official Groq Python SDK.</li>
+          <li>Default model: <code>qwen/qwen3.8-27b</code>, set by the <code>GROQ_MODEL</code> environment variable. The name was checked against the Groq vision documentation on 2026-10-20.</li>
+          <li>Request: the validated image is encoded as a base64 data URL and sent with a prompt that asks for JSON only, plain symptom descriptions, and uncertainty language. Temperature is 0.2 and the completion limit is 1024 tokens.</li>
+          <li>Response: the reply is parsed into a fixed schema. If it is not valid JSON, the raw text is kept as a low confidence summary. Results are labelled by a <code>source</code> field, either <code>mock</code> or <code>live</code>.</li>
+          <li>Key handling: the key is read only from the <code>GROQ_API_KEY</code> environment variable or a local <code>.env</code> file. It is not in the source code or in the download.</li>
+          <li>Endpoints: <code>GET /health</code> reports status and the model name. <code>POST /assess</code> validates the upload, then returns mock output or a live model response.</li>
+        </ul>
+        <p>The reference repository at <a href="https://github.com/shukur-alom/leaf-diseases-detect" target="_blank" rel="noopener noreferrer">shukur-alom/leaf-diseases-detect</a> (MIT License) was inspected for its concept and API approach. This application was written independently, with no code, images, or text copied. Its example model was retired by Groq on 2026-07-17, so a currently supported model was selected from the Groq documentation instead.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="screenshots-heading">
+      <div class="shell">
+        <h2 id="screenshots-heading">Screenshots</h2>
+        <p>These are genuine screenshots of the application running locally. Neither shows a live model result, because live inference was not verified for this project.</p>
+        <div class="figure-list">
+          <figure>
+            <img src="figures/app-home.png" width="1280" height="1400" alt="Screenshot of the plant health app. The sidebar shows demo mode selected, the FastAPI address, and the model name qwen/qwen3.8-27b. The main area shows a leaf image upload control, an optional context box, and a note that results are not verified diagnoses." />
+            <figcaption>The Streamlit interface in demo mode, with the upload control, model name, and disclaimer visible.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/api-docs.png" width="1280" height="1000" alt="Screenshot of the FastAPI documentation page for the plant health app, listing a GET health endpoint and a POST assess endpoint, with response schemas below." />
+            <figcaption>The FastAPI documentation page, showing the <code>/health</code> and <code>/assess</code> endpoints.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="verified-heading">
+      <div class="shell">
+        <h2 id="verified-heading">What was verified</h2>
+        <h3>Demonstrated functionality</h3>
+        <ul>
+          <li>The health endpoint returned status ok, the model name, and the 5 MB limit.</li>
+          <li>A mock assessment over HTTP returned <code>source: mock</code> with correct image details for a sample PNG. No image was sent to a model in that test.</li>
+          <li>The Streamlit interface loaded in a browser and showed the upload flow, the demo and live mode choices, the model name, and the disclaimer.</li>
+          <li>Thirteen automated tests pass. They cover image validation, mock labelling, missing key handling, request shape, response parsing, and both API endpoints.</li>
+        </ul>
+        <h3>Not verified</h3>
+        <ul>
+          <li>Live vision inference was not verified. No Groq key was configured during the final check, and live mode returned HTTP 503 with a message explaining that the key is not set. That is the intended behaviour when no key is present.</li>
+          <li>Disease identification accuracy is unverified. No labelled test set was used, and no accuracy figure exists for this project. Demo output shows the software flow only. It is not evidence that the model identifies plant disease correctly.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="local-heading">
+      <div class="shell">
+        <h2 id="local-heading">Run it locally</h2>
+        <p>The download contains a README with full setup instructions. In short:</p>
+        <ul>
+          <li>Unzip the source code and create a Python virtual environment (Python 3.11 or later).</li>
+          <li>Install the dependencies with <code>pip install -r requirements.txt</code>.</li>
+          <li>For live mode, copy <code>.env.example</code> to <code>.env</code> and add your own Groq key. Demo mode needs no key.</li>
+          <li>Start the API with <code>uvicorn api:app --reload --port 8000</code>, then start the interface with <code>streamlit run app.py</code> in a second terminal.</li>
+        </ul>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/vision-plant-health-assessment-source.zip">Download Source Code <span aria-hidden="true">↓</span></a>
+        </div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="limits-heading">
+      <div class="shell">
+        <h2 id="limits-heading">Limitations and privacy</h2>
+        <ul>
+          <li>The model can invent a disease name, miss a real problem, or sound sure when it is not.</li>
+          <li>One photo is weak evidence. Light, blur, background, and leaf angle change the result.</li>
+          <li>Disease, pests, watering, light, and nutrient problems can look alike, so similar symptoms do not point to one cause.</li>
+          <li>Severity is a rough visual guess, not a measurement. The app cannot check roots or soil, or use lab methods.</li>
+          <li>The sample images in the download are synthetic drawings for upload testing. They are not photos and not evidence of real disease.</li>
+          <li>Hosted model names change over time. If the default model is retired, set <code>GROQ_MODEL</code> to a currently supported vision model from the Groq documentation.</li>
+        </ul>
+        <p>In live mode, your image and any context text are sent to Groq, a third party, for processing. Demo mode sends nothing to any external service. Uploads are validated in memory and are not saved to disk by the API, and there is no account system or image archive. Do not upload images you do not want processed by a third party API.</p>
+        <p>The downloadable archive contains the Python application, tests, requirements, documentation, sample images, screenshots, and this case study text. It does not contain a <code>.env</code> file, any API key, or caches.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/vision-plant-health-assessment-source.zip">Download Source Code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="https://console.groq.com/docs/vision" target="_blank" rel="noopener noreferrer">Groq vision documentation <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <a class="footer-brand" href="/">F<span>.</span></a>
+      <span>© <span id="year">2026</span> Francis Amoah Nuako</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+  <script src="/script.js" defer></script>
+</body>
+</html>
