@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f8f5" />
+  <title>Heart Disease Classification and Model Evaluation | Francis Amoah Nuako</title>
+  <meta name="description" content="Educational comparison of Random Forest, Decision Tree, Naive Bayes, and SVM on the UCI Cleveland heart-disease dataset (303 records, one held-out split). Not a clinically validated diagnostic tool." />
+  <meta name="author" content="Francis Amoah Nuako" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://pcboss.me/projects/heart-disease-classification/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/styles.css" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Francis Amoah Nuako" />
+  <meta property="og:title" content="Heart Disease Classification and Model Evaluation | Francis Amoah Nuako" />
+  <meta property="og:description" content="Educational comparison of Random Forest, Decision Tree, Naive Bayes, and SVM on the UCI Cleveland heart-disease dataset (303 records, one held-out split). Not a clinically validated diagnostic tool." />
+  <meta property="og:url" content="https://pcboss.me/projects/heart-disease-classification/" />
+  <meta property="og:image" content="https://pcboss.me/projects/heart-disease-classification/figures/05_model_comparison.png" />
+  <meta property="og:image:alt" content="Grouped bar chart comparing accuracy, precision, recall, F1, and ROC-AUC for Random Forest, Decision Tree, Naive Bayes, and SVM on the held-out test set." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Heart Disease Classification and Model Evaluation | Francis Amoah Nuako" />
+  <meta name="twitter:description" content="Educational comparison of Random Forest, Decision Tree, Naive Bayes, and SVM on the UCI Cleveland heart-disease dataset (303 records, one held-out split). Not a clinically validated diagnostic tool." />
+  <meta name="twitter:url" content="https://pcboss.me/projects/heart-disease-classification/" />
+  <meta name="twitter:image" content="https://pcboss.me/projects/heart-disease-classification/figures/05_model_comparison.png" />
+  <meta name="twitter:image:alt" content="Grouped bar chart comparing accuracy, precision, recall, F1, and ROC-AUC for Random Forest, Decision Tree, Naive Bayes, and SVM on the held-out test set." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Heart Disease Classification and Model Evaluation",
+    "description": "Educational comparison of four classical classifiers on the UCI Cleveland heart-disease dataset, with leakage-safe preprocessing and a single held-out test evaluation.",
+    "url": "https://pcboss.me/projects/heart-disease-classification/",
+    "author": {
+      "@type": "Person",
+      "name": "Francis Amoah Nuako",
+      "url": "https://pcboss.me"
+    },
+    "isBasedOn": "https://archive.ics.uci.edu/dataset/45/heart+disease"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="shell nav-row">
+      <a href="/" class="brand" aria-label="Francis Amoah Nuako — home"><span class="brand-mark">F<span>.</span></span><span class="brand-name">FRANCIS AMOAH NUAKO</span></a>
+      <nav class="site-nav" aria-label="Main navigation" id="siteNav">
+        <a href="/#about">About</a>
+        <a href="/#work">Projects</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+      <a class="nav-contact" href="mailto:francisnuako@gmail.com">Let's connect <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="main" class="case">
+    <section class="section case-hero" aria-labelledby="project-title">
+      <div class="shell">
+        <p class="overline case-kicker">Independent project · Educational ML evaluation</p>
+        <h1 id="project-title">Heart Disease Classification and Model Evaluation</h1>
+        <p class="case-lead">A reproducible comparison of four classical classifiers — Random Forest, Decision Tree, Gaussian Naive Bayes, and Support Vector Machine (SVM) — on the public UCI Cleveland heart-disease dataset. The emphasis is methodological: leakage-safe preprocessing, training-only cross-validation, and a single held-out test evaluation.</p>
+        <p class="case-note">This is an educational portfolio project. The results come from one held-out test split of 61 records. The models are not clinically validated diagnostic tools, no external validation was performed, and nothing here is suitable for a medical decision.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/heart-disease-classification-source.zip">Download source code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="/#work">Back to projects</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" aria-label="Headline measurements">
+      <div class="stat-grid">
+        <div class="stat"><strong>303</strong><span>Patient records</span></div>
+        <div class="stat"><strong>13</strong><span>Input features</span></div>
+        <div class="stat"><strong>242</strong><span>Training records</span></div>
+        <div class="stat"><strong>61</strong><span>Held-out test records</span></div>
+        <div class="stat"><strong>4</strong><span>Models compared</span></div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="overview-heading">
+      <div class="shell">
+        <h2 id="overview-heading">Overview</h2>
+        <p>The dataset contains 303 records: 164 without disease and 139 with disease (45.9%). The target is the original <code>num</code> value collapsed to binary: 0 for no disease, and 1 for <code>num</code> 1–4, meaning more than 50% diameter narrowing in any major vessel in the source coding. Collapsing the grades discards disease-severity information.</p>
+        <p>Four fixed, pre-declared models were compared without tuning on the test set: Random Forest (300 trees), Decision Tree, Gaussian Naive Bayes, and SVM with an RBF kernel (C = 1.0, probability estimates enabled). SVM and Random Forest performed best on both training cross-validation and the held-out test set. With only 61 test records, differences of a few percentage points are within noise.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="source-heading">
+      <div class="shell">
+        <h2 id="source-heading">Dataset and attribution</h2>
+        <p>The source is the UCI Machine Learning Repository, <a href="https://archive.ics.uci.edu/dataset/45/heart+disease" target="_blank" rel="noopener noreferrer">Heart Disease (ID 45)</a>, processed Cleveland file (<code>processed.cleveland.data</code>). License: CC BY 4.0 under UCI terms; attribution is required. DOI: <a href="https://doi.org/10.24432/C52P4X" target="_blank" rel="noopener noreferrer">10.24432/C52P4X</a>.</p>
+        <p>Citation: Janosi, A., Steinbrunn, W., Pfisterer, M., &amp; Detrano, R. (1989). <em>Heart Disease</em> [Dataset]. UCI Machine Learning Repository. https://doi.org/10.24432/C52P4X</p>
+        <p>UCI states that patient names and social security numbers were removed from this public file. No patient-level records are published on this page. The outputs here are aggregates, model metrics, and figures only. The implementation code is MIT licensed (see the LICENSE file in the download). The dataset remains CC BY 4.0, so reuse of figures or results should credit both this project and the UCI dataset.</p>
+        <p>The 13 input features are age, sex, chest-pain type (<code>cp</code>), resting blood pressure (<code>trestbps</code>), cholesterol (<code>chol</code>), fasting blood sugar (<code>fbs</code>), resting ECG (<code>restecg</code>), maximum heart rate achieved (<code>thalach</code>), exercise-induced angina (<code>exang</code>), exercise ST depression (<code>oldpeak</code>), ST slope (<code>slope</code>), number of major vessels (<code>ca</code>), and thalassemia scan result (<code>thal</code>). Ages run from 29 to 77 years. In the file coding, sex has 97 records in one level and 206 in the other.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="eda-heading">
+      <div class="shell">
+        <h2 id="eda-heading">Exploratory analysis</h2>
+        <p>The class balance is close to even: 164 records without disease and 139 with disease. Six cells are missing, marked “?” in the raw file: four in <code>ca</code> and two in <code>thal</code>. No exact duplicate rows were found. Missing values are imputed inside the preprocessing pipeline, so their handling is learned from training data only.</p>
+        <p>The age chart and correlation heatmap are descriptive views of this cohort. They do not show causal relationships. In the numeric-feature heatmap, the strongest Pearson correlations with the binary target are number of major vessels (0.46), exercise ST depression (0.42), and maximum heart rate achieved (−0.42).</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="method-heading">
+      <div class="shell">
+        <h2 id="method-heading">Preprocessing and methodology</h2>
+        <ul>
+          <li>Exact duplicate rows, checked on features plus target, were dropped before splitting. None were found, and train/test overlap is asserted as zero at run time.</li>
+          <li>The split is stratified 80/20 (242 training, 61 test), with <code>random_state=42</code>.</li>
+          <li>Numeric features use median imputation and standard scaling. Categorical features use most-frequent imputation and one-hot encoding.</li>
+          <li>Every preprocessing statistic is fit only inside the training pipeline, or inside each cross-validation training fold.</li>
+          <li>Model ranking uses stratified five-fold cross-validation on the training data only. The held-out test set is used for one final evaluation and was never used for tuning. No hyperparameter tuning was performed.</li>
+          <li>Random Forest feature importance is impurity-based and computed on training data. It is associational, not causal or clinical evidence.</li>
+        </ul>
+        <p>Training-only five-fold cross-validation means were: SVM accuracy 0.831 and ROC-AUC 0.885; Random Forest accuracy 0.810 and ROC-AUC 0.890; Naive Bayes accuracy 0.723 and ROC-AUC 0.871; Decision Tree accuracy 0.702 and ROC-AUC 0.700.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="results-heading">
+      <div class="shell">
+        <h2 id="results-heading">Held-out test results</h2>
+        <p>The test set has 61 records: 33 without disease and 28 with disease. These are results from a single held-out split. They are not an external validation and they do not establish clinical performance.</p>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <caption class="case-note">Held-out test metrics from results.json. TN, FP, FN, and TP are counts on the 61 test records.</caption>
+            <thead>
+              <tr><th scope="col">Model</th><th scope="col">Accuracy</th><th scope="col">Precision</th><th scope="col">Recall</th><th scope="col">F1</th><th scope="col">ROC-AUC</th><th scope="col">TN</th><th scope="col">FP</th><th scope="col">FN</th><th scope="col">TP</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>SVM</td><td>90.2%</td><td>0.867</td><td>0.929</td><td>0.897</td><td>0.961</td><td>29</td><td>4</td><td>2</td><td>26</td></tr>
+              <tr><td>Random Forest</td><td>88.5%</td><td>0.839</td><td>0.929</td><td>0.881</td><td>0.939</td><td>28</td><td>5</td><td>2</td><td>26</td></tr>
+              <tr><td>Decision Tree</td><td>75.4%</td><td>0.686</td><td>0.857</td><td>0.762</td><td>0.762</td><td>22</td><td>11</td><td>4</td><td>24</td></tr>
+              <tr><td>Naive Bayes</td><td>67.2%</td><td>0.595</td><td>0.893</td><td>0.714</td><td>0.848</td><td>16</td><td>17</td><td>3</td><td>25</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>SVM has the highest accuracy and ROC-AUC on this split. Random Forest is close behind, with the same recall. Naive Bayes also has high recall (0.893), but at a cost: 17 of the 33 records without disease are classified as disease. That trade-off is visible in the confusion matrices.</p>
+        <p>The most influential Random Forest variables are maximum heart rate achieved (<code>thalach</code>, 0.100), thalassemia scan result <code>thal = 3.0</code> (0.092), number of major vessels (<code>ca</code>, 0.092), asymptomatic chest-pain type <code>cp = 4.0</code> (0.086), and exercise ST depression (<code>oldpeak</code>, 0.082). These are training-data impurity importances. They are not causal effects and they are not clinical evidence.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="charts-heading">
+      <div class="shell">
+        <h2 id="charts-heading">Visualizations</h2>
+        <p>These seven figures were generated by the analysis from the 303-record UCI Cleveland file. They show aggregates and model scores only.</p>
+        <div class="figure-list">
+          <figure>
+            <img src="figures/01_target_distribution.png" width="968" height="768" alt="Bar chart of the binary target in the UCI Cleveland dataset. No disease has 164 patients. Disease has 139 patients, out of 303 records." />
+            <figcaption>Disease class distribution. Of 303 records, 164 have no disease and 139 have disease (45.9%).</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/02_age_by_target.png" width="1369" height="770" alt="Overlapping histograms of age by heart-disease status. Ages run from 29 to 77. The disease group is more concentrated in the late fifties, while the no-disease group has more patients in the early fifties and forties." />
+            <figcaption>Age distribution by disease status. Ages run from 29 to 77 years. The overlap between the two groups is large.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/03_correlation_heatmap.png" width="1308" height="1155" alt="Pearson correlation heatmap for numeric features and the binary target. Number of major vessels and exercise ST depression are positively correlated with the target, while maximum heart rate achieved is negatively correlated." />
+            <figcaption>Pearson correlations among numeric features and the target. The largest target correlations are <code>ca</code> (0.46), <code>oldpeak</code> (0.42), and <code>thalach</code> (−0.42). Correlation is not causation.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/04_feature_importance.png" width="1567" height="969" alt="Horizontal bar chart of the top 15 Random Forest impurity importances from training data. Maximum heart rate achieved is highest, followed by thalassemia scan result, number of major vessels, asymptomatic chest-pain type, and exercise ST depression." />
+            <figcaption>Top Random Forest features on training data. Maximum heart rate achieved (<code>thalach</code>) ranks first, followed by <code>thal = 3.0</code>, <code>ca</code>, <code>cp = 4.0</code>, and <code>oldpeak</code>. Impurity importance is associational.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/05_model_comparison.png" width="1968" height="969" alt="Grouped bar chart of held-out test accuracy, precision, recall, F1, and ROC-AUC for Random Forest, Decision Tree, Naive Bayes, and SVM. SVM and Random Forest have the tallest bars in most groups." />
+            <figcaption>Held-out test performance by model. SVM and Random Forest lead on accuracy, F1, and ROC-AUC. Naive Bayes keeps high recall with much lower precision.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/06_confusion_matrices.png" width="1770" height="1573" alt="Four confusion-matrix heatmaps for the 61-record held-out test set. SVM has 29 true negatives, 4 false positives, 2 false negatives, and 26 true positives. Naive Bayes has 17 false positives, the most of the four models." />
+            <figcaption>Confusion matrices on the 61 test records. SVM misclassifies 6 records. Naive Bayes misclassifies 20, including 17 false positives.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/07_roc_curves.png" width="1368" height="1170" alt="Held-out ROC curves for the four models and a dashed chance line. SVM has AUC 0.961, Random Forest 0.939, Naive Bayes 0.848, and Decision Tree 0.762." />
+            <figcaption>Held-out ROC curves. SVM (AUC 0.961) and Random Forest (AUC 0.939) sit above Naive Bayes (0.848) and Decision Tree (0.762). With 61 test records, these curves are coarse.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="limits-heading">
+      <div class="shell">
+        <h2 id="limits-heading">Limitations and conclusions</h2>
+        <ul>
+          <li>Single-centre Cleveland cohort collected in the 1980s, with 303 records. It is not representative of modern or diverse populations.</li>
+          <li>The held-out test set has 61 records, so test metrics have wide uncertainty. A few records would change the percentages.</li>
+          <li>Collapsing the original disease grades 1–4 into one class discards severity information.</li>
+          <li>The angiographic label and 1980s measurement practices may not match current clinical definitions or devices.</li>
+          <li>No external validation, calibration assessment, fairness or subgroup analysis, or prospective evaluation was performed.</li>
+          <li>The missing-data mechanism for <code>ca</code> and <code>thal</code> is unknown. Those values are imputed, not observed.</li>
+          <li>Impurity-based feature importance is biased toward high-cardinality features and is not causal.</li>
+        </ul>
+        <p>Within those limits, the project shows a complete, test-covered evaluation: the dataset is checked before splitting, preprocessing is fit only on training data, models are ranked with training cross-validation, and the test set is used once. SVM and Random Forest score highest on this split. That is a statement about this small historical dataset, not evidence for clinical use.</p>
+        <p>The downloadable archive contains the reproducible Python implementation, tests, requirements, documentation, figures, and machine-readable results. It excludes the raw UCI data file; the runner downloads it from UCI. The code is MIT licensed. The dataset is CC BY 4.0, credited above.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/heart-disease-classification-source.zip">Download source code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="https://archive.ics.uci.edu/dataset/45/heart+disease" target="_blank" rel="noopener noreferrer">Dataset source <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <a class="footer-brand" href="/">F<span>.</span></a>
+      <span>© <span id="year">2026</span> Francis Amoah Nuako</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+  <script src="/script.js" defer></script>
+</body>
+</html>
