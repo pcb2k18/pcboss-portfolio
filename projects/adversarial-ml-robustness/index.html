@@ -1,0 +1,308 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f8f5" />
+  <title>Adversarial Machine Learning and Model Robustness | Francis Amoah Nuako</title>
+  <meta name="description" content="A CIFAR-10 CNN robustness study. Clean accuracy was 75.50 percent, while FGSM and PGD at 8/255 reduced accuracy to 3.00 percent and 0.00 percent. A small adversarial training run is also evaluated." />
+  <meta name="author" content="Francis Amoah Nuako" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://pcboss.me/projects/adversarial-ml-robustness/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/styles.css" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Francis Amoah Nuako" />
+  <meta property="og:title" content="Adversarial Machine Learning and Model Robustness | Francis Amoah Nuako" />
+  <meta property="og:description" content="A CIFAR-10 CNN robustness study. Clean accuracy was 75.50 percent, while FGSM and PGD at 8/255 reduced accuracy to 3.00 percent and 0.00 percent. A small adversarial training run is also evaluated." />
+  <meta property="og:url" content="https://pcboss.me/projects/adversarial-ml-robustness/" />
+  <meta property="og:image" content="https://pcboss.me/projects/adversarial-ml-robustness/figures/06_clean_vs_adversarial.png" />
+  <meta property="og:image:alt" content="Bar chart comparing clean accuracy with FGSM and PGD accuracy at epsilon 8 over 255. The normal CNN falls from 75.5 percent clean to 3.0 percent under FGSM and 0.0 percent under PGD. The adversarially trained CNN starts lower at 42.3 percent and retains 27.8 percent under FGSM and 27.0 percent under PGD." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Adversarial Machine Learning and Model Robustness | Francis Amoah Nuako" />
+  <meta name="twitter:description" content="A CIFAR-10 CNN robustness study. Clean accuracy was 75.50 percent, while FGSM and PGD at 8/255 reduced accuracy to 3.00 percent and 0.00 percent. A small adversarial training run is also evaluated." />
+  <meta name="twitter:url" content="https://pcboss.me/projects/adversarial-ml-robustness/" />
+  <meta name="twitter:image" content="https://pcboss.me/projects/adversarial-ml-robustness/figures/06_clean_vs_adversarial.png" />
+  <meta name="twitter:image:alt" content="Bar chart comparing clean accuracy with FGSM and PGD accuracy at epsilon 8 over 255. The normal CNN falls from 75.5 percent clean to 3.0 percent under FGSM and 0.0 percent under PGD. The adversarially trained CNN starts lower at 42.3 percent and retains 27.8 percent under FGSM and 27.0 percent under PGD." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Adversarial Machine Learning and Model Robustness",
+    "description": "Evaluation of FGSM and PGD attacks and FGSM adversarial training on a compact CNN trained from scratch on CIFAR-10.",
+    "url": "https://pcboss.me/projects/adversarial-ml-robustness/",
+    "author": {
+      "@type": "Person",
+      "name": "Francis Amoah Nuako",
+      "url": "https://pcboss.me"
+    },
+    "isBasedOn": "https://www.cs.toronto.edu/~kriz/cifar.html"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="shell nav-row">
+      <a href="/" class="brand" aria-label="Francis Amoah Nuako, home"><span class="brand-mark">F<span>.</span></span><span class="brand-name">FRANCIS AMOAH NUAKO</span></a>
+      <nav class="site-nav" aria-label="Main navigation" id="siteNav">
+        <a href="/#about">About</a>
+        <a href="/#work">Projects</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+      <a class="nav-contact" href="mailto:francisnuako@gmail.com">Let's connect <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="main" class="case">
+    <section class="section case-hero" aria-labelledby="project-title">
+      <div class="shell">
+        <p class="overline case-kicker">Independent project · Deep learning security</p>
+        <h1 id="project-title">Adversarial Machine Learning and Model Robustness</h1>
+        <p class="case-lead">A compact convolutional neural network was trained from scratch on CIFAR-10, then attacked with white-box FGSM and PGD perturbations. The study measures how accuracy changes as the perturbation budget grows, and whether a small adversarial training run changes that picture.</p>
+        <p class="case-note">Technologies: Python, PyTorch, Torchvision, NumPy, and Matplotlib. All results come from actual model predictions recorded in <code>outputs/results.json</code>, measured on one fixed subset of 1,000 test images. Robustness to these attacks is not proof of security against all attacks.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/adversarial-ml-robustness-source.zip">Download source code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="/#work">Back to projects</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" aria-label="Headline measurements">
+      <div class="stat-grid">
+        <div class="stat"><strong>75.50%</strong><span>Clean accuracy of the standard CNN on 1,000 test images</span></div>
+        <div class="stat"><strong>3.00%</strong><span>Standard CNN accuracy under FGSM at 8/255</span></div>
+        <div class="stat"><strong>0.00%</strong><span>Standard CNN accuracy under PGD at 8/255</span></div>
+        <div class="stat"><strong>42.30%</strong><span>Clean accuracy of the adversarially trained CNN</span></div>
+        <div class="stat"><strong>27.00%</strong><span>Adversarially trained CNN accuracy under PGD at 8/255</span></div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="overview-heading">
+      <div class="shell">
+        <h2 id="overview-heading">Project overview</h2>
+        <p>An adversarial example is an input that has been changed in a small, deliberate way so that a model predicts the wrong class, while the image still looks almost the same to a person. The change is not random noise. It is calculated from the model's own gradients, so it pushes the input in the direction that increases the model's loss.</p>
+        <p>This project builds that failure mode from first principles and measures it. A normally trained CNN is evaluated on clean images and then on attacked versions of the same images, at four perturbation strengths. A second CNN, trained with adversarial examples mixed into training, is evaluated under identical settings. Comparing the two on the same 1,000 images shows both the benefit and the cost of the defense.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="objective-heading">
+      <div class="shell">
+        <h2 id="objective-heading">Research objective</h2>
+        <p>The research question is: can small, gradient based, pixel space perturbations change the predictions of a compact convolutional image classifier, and how does the effect grow with perturbation strength?</p>
+        <p>Two comparisons follow from that question. First, clean accuracy against robust accuracy for the same model on the same images, which separates ordinary classification performance from performance under attack. Second, the normally trained model against the adversarially trained model, which shows how much robustness the defense bought and how much clean accuracy it cost. The threat model is untargeted white-box attack under an L-infinity budget: the attacker knows the architecture and weights, computes exact input gradients, and may change every pixel by at most epsilon.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="dataset-heading">
+      <div class="shell">
+        <h2 id="dataset-heading">CIFAR-10 dataset</h2>
+        <p>CIFAR-10 was loaded with torchvision from the official source at the University of Toronto (<a href="https://www.cs.toronto.edu/~kriz/cifar.html" target="_blank" rel="noopener noreferrer">CIFAR-10</a>). The official training split has 50,000 images and the official test split has 10,000 images. Each image is 32 by 32 pixels with 3 colour channels. The ten classes are airplane, automobile, bird, cat, deer, dog, frog, horse, ship, and truck. Both splits are balanced: 5,000 images per class in training and 1,000 per class in testing. Raw CIFAR-10 files are not included in the source download.</p>
+        <p>Model development used only the official training split. Training used a stratified subset of 15,000 training images, with a disjoint stratified validation set of 3,000 images, also from the training split, for checkpoint selection. Test labels were not used for fitting, tuning, or model selection. Final evaluation used one fixed stratified subset of 1,000 test images, 100 per class, and the same subset was used for every clean and adversarial comparison.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="model-heading">
+      <div class="shell">
+        <h2 id="model-heading">CNN architecture and training</h2>
+        <p>The classifier is a compact CNN written for this project: three convolutional blocks with 32, 64, and 128 channels, with batch normalization and max pooling, followed by a 128 unit fully connected layer with dropout. It has 403,306 trainable parameters.</p>
+        <ul>
+          <li>Training from scratch on 15,000 training images for 12 epochs, with a batch size of 128.</li>
+          <li>Optimizer AdamW with learning rate 0.001 and weight decay 0.0005, and a cosine learning rate schedule.</li>
+          <li>Random crop and horizontal flip augmentation. Seed 42. Training ran on CPU.</li>
+          <li>Checkpoint selection used the 3,000 image validation holdout from the training split. Best validation accuracy was 75.57 percent.</li>
+          <li>Clean accuracy on the fixed test subset was 75.50 percent (755 of 1,000 images).</li>
+        </ul>
+        <p>The model was trained on a subset of the available data for a small number of epochs on a personal computer, so its clean accuracy is below what a longer run on the full training split would reach. Every robustness figure that follows is conditional on this model.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="attacks-heading">
+      <div class="shell">
+        <h2 id="attacks-heading">Adversarial attack methodology</h2>
+        <p>Both attacks work in pixel space, where image values run from 0 to 1. Epsilon is stated in 255ths, so 8/255 allows each pixel to change by at most about 0.031. Model normalization is applied inside the attack after gradients are taken with respect to the pixel space image, so the budget always means the same thing.</p>
+        <ul>
+          <li><strong>FGSM</strong> (Fast Gradient Sign Method) takes one step. It computes the gradient of the loss with respect to the input pixels, then moves every pixel by the full epsilon in the sign direction of that gradient. It is fast and simple, but it only looks at the gradient at the original image.</li>
+          <li><strong>PGD</strong> (Projected Gradient Descent) repeats that idea. It starts from a uniform random point inside the allowed ball, then takes 20 steps of size epsilon divided by 4, projecting back into the L-infinity ball and clamping to the valid image range after every step. In this run it used 1 restart, and the strongest result found is kept. Because it searches the allowed region instead of stepping once, PGD usually finds stronger attacks than FGSM at the same epsilon.</li>
+          <li>Epsilon values tested: 0/255, 2/255, 4/255, and 8/255. At 0/255 no perturbation is allowed, so robust accuracy equals clean accuracy by construction. That row is a sanity check.</li>
+          <li>Two metrics are reported per attack. Robust accuracy is the share of all 1,000 test images still classified correctly after attack. Attack success rate is narrower: among images the model classified correctly before the attack, it is the share whose prediction changed.</li>
+        </ul>
+        <p>Clean accuracy and robust accuracy answer different questions. Clean accuracy measures performance on ordinary inputs. Robust accuracy measures performance when an attacker is deliberately choosing the input to cause an error, within a stated budget. A model can be accurate in normal use and still fail under attack, which is exactly what happened here.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="fgsm-heading">
+      <div class="shell">
+        <h2 id="fgsm-heading">FGSM attack experiments</h2>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <caption class="case-note">FGSM results from results.json, on the fixed subset of 1,000 test images. Attack success rate is measured among the images each model classified correctly before the attack (755 for the standard CNN, 423 for the adversarially trained CNN).</caption>
+            <thead>
+              <tr><th scope="col">Epsilon</th><th scope="col">Standard CNN robust accuracy</th><th scope="col">Standard CNN attack success</th><th scope="col">Adversarially trained robust accuracy</th><th scope="col">Adversarially trained attack success</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>0/255</td><td>75.50%</td><td>0.00%</td><td>42.30%</td><td>0.00%</td></tr>
+              <tr><td>2/255</td><td>26.10%</td><td>65.43%</td><td>39.30%</td><td>7.33%</td></tr>
+              <tr><td>4/255</td><td>9.00%</td><td>88.08%</td><td>35.50%</td><td>16.31%</td></tr>
+              <tr><td>8/255</td><td>3.00%</td><td>96.03%</td><td>27.80%</td><td>34.28%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Even the weakest non-zero FGSM budget removes most of the standard CNN's accuracy: at 2/255 it falls from 75.50 percent to 26.10 percent, and at 8/255 only 30 of 1,000 images are still classified correctly. The attack succeeded on 96.03 percent of the images the model originally got right.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="pgd-heading">
+      <div class="shell">
+        <h2 id="pgd-heading">PGD attack experiments</h2>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <caption class="case-note">PGD results from results.json, using 20 steps, step size epsilon divided by 4, a random start, and 1 restart, on the same 1,000 test images.</caption>
+            <thead>
+              <tr><th scope="col">Epsilon</th><th scope="col">Standard CNN robust accuracy</th><th scope="col">Standard CNN attack success</th><th scope="col">Adversarially trained robust accuracy</th><th scope="col">Adversarially trained attack success</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>0/255</td><td>75.50%</td><td>0.00%</td><td>42.30%</td><td>0.00%</td></tr>
+              <tr><td>2/255</td><td>12.60%</td><td>83.31%</td><td>39.10%</td><td>7.80%</td></tr>
+              <tr><td>4/255</td><td>0.30%</td><td>99.60%</td><td>35.40%</td><td>16.31%</td></tr>
+              <tr><td>8/255</td><td>0.00%</td><td>100.00%</td><td>27.00%</td><td>36.17%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>PGD is the stronger attack at every non-zero epsilon, which matches how it is built: 20 gradient steps with projection find better attacks than one FGSM step. At 8/255 the standard CNN classifies none of the 1,000 attacked images correctly, and the attack succeeded on every image the model originally got right. At 4/255 only 3 images survive.</p>
+        <p>These PGD numbers are an upper bound on true robust accuracy, not a certificate. They come from a finite attack with 20 steps and 1 restart. A stronger attacker using more steps and restarts could push robust accuracy lower, and nothing here rules that out.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="defense-heading">
+      <div class="shell">
+        <h2 id="defense-heading">Adversarial training and defense</h2>
+        <p>A second CNN with the same architecture was trained with FGSM adversarial examples at 8/255 generated on every training batch, so the model learned from attacked versions of its training images as well as clean ones. It was evaluated on the identical fixed test subset with identical attack settings.</p>
+        <p>The defense worked in the direction expected, within this small experiment. Under PGD at 8/255, accuracy rose from 0.00 percent to 27.00 percent, and under FGSM at 8/255 from 3.00 percent to 27.80 percent. Attack success rates fell sharply at every epsilon: for PGD at 2/255, from 83.31 percent to 7.80 percent.</p>
+        <p>The cost is visible in the clean column. Clean accuracy fell from 75.50 percent to 42.30 percent, a drop of 33.2 percentage points. That is the trade-off between clean accuracy and robustness in this experiment: the adversarially trained model gives up a large amount of ordinary performance to keep some performance under attack. It crosses over quickly, though. At every non-zero epsilon tested, the adversarially trained model is more accurate than the standard model, so the trade only favours the standard model when no attack is present.</p>
+        <p>Two cautions apply. First, this comparison is not a controlled ablation. The adversarially trained model also used fewer training samples (8,000 against 15,000) and fewer epochs (5 against 12), and its best validation accuracy was 39.20 percent, so part of the clean accuracy gap may reflect the smaller training run rather than the defense itself. The comparison is indicative, not a clean measurement of the defense alone. Second, adversarial training here used FGSM examples only, at one epsilon. It improves robustness to the attacks tested. It does not make the model secure against all attacks, and an attacker who knows the defense is present could adapt to it.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="comparison-heading">
+      <div class="shell">
+        <h2 id="comparison-heading">Performance comparison</h2>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <caption class="case-note">Headline comparison from results.json. Clean accuracy at epsilon 0/255, robust accuracy at 8/255. The adversarially trained model used 8,000 training samples and 5 epochs, against 15,000 samples and 12 epochs for the standard model.</caption>
+            <thead>
+              <tr><th scope="col">Model</th><th scope="col">Clean accuracy</th><th scope="col">FGSM at 8/255</th><th scope="col">PGD at 8/255</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Standard CNN</td><td>75.50%</td><td>3.00%</td><td>0.00%</td></tr>
+              <tr><td>Adversarially trained CNN</td><td>42.30%</td><td>27.80%</td><td>27.00%</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Read as counts on the same 1,000 images, the standard CNN goes from 755 correct on clean images to 30 under FGSM and 0 under PGD at 8/255. The adversarially trained CNN goes from 423 correct on clean images to 278 under FGSM and 270 under PGD. Neither model is both accurate and robust. The experiment presents a choice between the two, at this scale of training.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="charts-heading">
+      <div class="shell">
+        <h2 id="charts-heading">Visualizations</h2>
+        <p>These ten figures were generated from <code>outputs/results.json</code> and the saved attacked examples. Perturbation figures are magnified, and they say so in their titles. The raw changes at 8/255 are close to invisible at normal scale.</p>
+        <div class="figure-list">
+          <figure>
+            <img src="figures/01_class_distribution.png" width="2000" height="700" alt="Two bar charts of CIFAR-10 class counts. The training split has 5,000 images in each of the ten classes. The test split has 1,000 images in each class." />
+            <figcaption>CIFAR-10 class distribution. Both official splits are balanced, at 5,000 images per class for training and 1,000 per class for testing.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/02_training_progress.png" width="1400" height="800" alt="Line chart of training and validation accuracy by epoch for the normally trained CNN. Training accuracy rises from about 33 percent to 73 percent over 12 epochs. Validation accuracy rises from about 48 percent to about 75 percent." />
+            <figcaption>Training progress for the standard CNN. Validation accuracy on the training split holdout reached a best of 75.57 percent, with 75.10 percent in the final epoch.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/03_clean_accuracy.png" width="1000" height="800" alt="Bar chart of clean accuracy on the fixed test subset. The normal CNN bar shows 75.5 percent. The adversarially trained CNN bar shows 42.3 percent." />
+            <figcaption>Clean accuracy on the fixed test subset of 1,000 images. The standard CNN reaches 75.50 percent and the adversarially trained CNN 42.30 percent.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/04_fgsm_robustness.png" width="1200" height="800" alt="Line chart of FGSM robust accuracy by epsilon. The standard CNN line falls steeply from 75.5 percent at zero to 3.0 percent at 8 over 255. The adversarially trained line starts at 42.3 percent and declines gently to 27.8 percent." />
+            <figcaption>FGSM robust accuracy by epsilon. The standard CNN collapses as the budget grows. The adversarially trained CNN starts lower and declines slowly.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/05_pgd_robustness.png" width="1200" height="800" alt="Line chart of PGD robust accuracy by epsilon. The standard CNN falls from 75.5 percent to 12.6 percent at 2 over 255, then to near zero. The adversarially trained CNN declines from 42.3 percent to 27.0 percent at 8 over 255." />
+            <figcaption>PGD robust accuracy by epsilon. PGD is stronger than FGSM against both models, and it reduces the standard CNN to 0.00 percent at 8/255.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/06_clean_vs_adversarial.png" width="1400" height="800" alt="Grouped bar chart of clean accuracy, FGSM accuracy at 8 over 255, and PGD accuracy at 8 over 255 for both models. The standard CNN leads on clean images and trails heavily under attack." />
+            <figcaption>Clean versus adversarial accuracy at 8/255. The two models swap positions: the standard CNN is better with no attack, and the adversarially trained CNN is better under both attacks.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/07_adversarial_examples.png" width="1200" height="2520" alt="Grid of CIFAR-10 example images in three columns: original, FGSM at 8 over 255, and PGD at 8 over 255. The attacked images look almost identical to the originals, but the predicted labels differ, for example a truck predicted as automobile and a bird predicted as frog." />
+            <figcaption>Original, FGSM, and PGD examples at 8/255. The images are shown at their true perturbation strength, not magnified, and the changes are hard to see. The predictions change anyway, which is the point of the attack.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/08_perturbations_magnified.png" width="1200" height="2520" alt="Grid of perturbation patterns for FGSM and PGD, magnified ten times as labelled in the figure. The PGD column shows dense coloured speckle across the whole image. The FGSM column is mostly blank at this scale." />
+            <figcaption>Magnified perturbations. These absolute perturbations are magnified 10 times for visibility, as stated in the figure title, and are not to scale with the original images. The real changes at 8/255 are at most about 0.031 per pixel.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/09_confusion_clean.png" width="1200" height="1000" alt="Confusion matrix for the standard CNN on clean test images. Most counts sit on the diagonal. Cat and dog are the most confused pair, and bird errors spread across several animal classes." />
+            <figcaption>Confusion matrix on clean images, standard CNN. Of 1,000 images, 755 are correct. The largest errors are between similar animals, such as cat and dog (23 each way).</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/10_confusion_pgd_8_255.png" width="1200" height="1000" alt="Confusion matrix for the standard CNN under PGD at 8 over 255. The diagonal is empty. Predictions pile up in a few classes, including frog, deer, ship, and truck." />
+            <figcaption>Confusion matrix under PGD at 8/255, standard CNN. The diagonal is empty: no class has a single correct prediction, and predictions concentrate in a few classes regardless of the true label.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="findings-heading">
+      <div class="shell">
+        <h2 id="findings-heading">Research findings</h2>
+        <ul>
+          <li>Small gradient based perturbations reliably change this model's predictions. Robust accuracy falls at every non-zero epsilon, for both attacks, on the same images that give 75.50 percent clean accuracy.</li>
+          <li>PGD was the stronger attack in this experiment. At every non-zero epsilon, its robust accuracy is lower and its attack success rate is higher than FGSM at the same epsilon, consistent with PGD searching the allowed region over 20 steps instead of taking one step.</li>
+          <li>The effect grows with the budget. For the standard CNN under PGD, robust accuracy goes from 75.50 percent at 0/255 to 12.60 percent at 2/255, 0.30 percent at 4/255, and 0.00 percent at 8/255.</li>
+          <li>Attacks do not need a target class to be effective. These are untargeted attacks. They only need to move the prediction away from the correct label, and the confusion matrix under PGD shows predictions piling into a few classes.</li>
+          <li>FGSM adversarial training improved robustness to both attacks tested, at a large clean accuracy cost. Under PGD at 8/255, robust accuracy rose from 0.00 percent to 27.00 percent, while clean accuracy fell from 75.50 percent to 42.30 percent.</li>
+          <li>The defense comparison is confounded. The adversarially trained model used fewer training samples and fewer epochs, so the size of the trade-off measured here should not be read as the trade-off a matched training run would give.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="limits-heading">
+      <div class="shell">
+        <h2 id="limits-heading">Limitations</h2>
+        <ul>
+          <li>The classifier was trained on a 15,000 image subset for 12 epochs on CPU, so its clean accuracy is below what a longer run on the full 50,000 image training split would reach. Robustness numbers are conditional on this model and this training run.</li>
+          <li>Evaluation used a fixed subset of 1,000 test images, 100 per class, not the full 10,000 image test split. Percentages therefore rest on small counts, and 0.00 percent means 0 of these 1,000 images.</li>
+          <li>PGD used 20 steps and 1 restart. A stronger attacker could reduce robust accuracy further, so these figures are an upper bound on robustness under this budget, not a certificate.</li>
+          <li>Only untargeted white-box FGSM and PGD under an L-infinity budget were tested. Nothing here covers black-box transfer attacks, query based attacks, physical world perturbations, poisoning, model extraction, other distance norms, larger budgets, or adaptive attackers who know a defense is present.</li>
+          <li>Adversarial training used FGSM examples only, at a single epsilon, in a smaller training run. It is a small experiment, not a production defense, and no certified defense is claimed.</li>
+          <li>CIFAR-10 images are small and low resolution, and this says nothing about whether a perturbation that fools the model would fool a human.</li>
+        </ul>
+        <p>The honest summary is narrow. This compact CNN, trained briefly on a subset of CIFAR-10, is accurate enough on clean images to be useful as a teaching example and fragile under white-box attack at budgets that leave images looking unchanged. Adversarial training recovered part of that fragility at a substantial clean accuracy cost in this run. Neither result makes the model secure, and neither should be read as a claim about other models, datasets, or attacks.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="download-heading">
+      <div class="shell">
+        <h2 id="download-heading">Source code download</h2>
+        <p>The downloadable archive contains the Python implementation (model, data loading, FGSM and PGD attacks, training, evaluation, metrics, and figure generation), the experiment configuration, automated tests, the README with reproduction instructions, the case study text, measured results, all ten figures, saved example arrays, and the two trained checkpoints. It does not contain raw CIFAR-10 data, caches, credentials, or a virtual environment. CIFAR-10 is downloaded through torchvision when the experiment is reproduced.</p>
+        <p>Independence and licence note: the reference repository <a href="https://github.com/poojakira/adversarial-ml-lab" target="_blank" rel="noopener noreferrer">poojakira/adversarial-ml-lab</a> was inspected before this project was built. Its licence is proprietary, all rights reserved and source visible. It is not an MIT licence. No code, experiments, reported figures, text, or figures were copied from it. This project is an original implementation based on the published definitions of FGSM (Goodfellow et al., 2015) and PGD (Madry et al., 2018). CIFAR-10 is provided by the University of Toronto for research use, under the terms on its dataset page.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/adversarial-ml-robustness-source.zip">Download source code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="https://www.cs.toronto.edu/~kriz/cifar.html" target="_blank" rel="noopener noreferrer">Dataset source <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <a class="footer-brand" href="/">F<span>.</span></a>
+      <span>© <span id="year">2026</span> Francis Amoah Nuako</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+  <script src="/script.js" defer></script>
+</body>
+</html>
