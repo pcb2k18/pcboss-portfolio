@@ -1,0 +1,225 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f8f5" />
+  <title>Machine Learning for Transaction Fraud Analysis | Francis Amoah Nuako</title>
+  <meta name="description" content="A leakage and class imbalance study on a public payment fraud file: 39,221 records, 1.43 percent fraud, and corrected model results after removing columns that reveal the label." />
+  <meta name="author" content="Francis Amoah Nuako" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://pcboss.me/projects/transaction-fraud-analysis/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/styles.css" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Francis Amoah Nuako" />
+  <meta property="og:title" content="Machine Learning for Transaction Fraud Analysis | Francis Amoah Nuako" />
+  <meta property="og:description" content="A leakage and class imbalance study on a public payment fraud file: 39,221 records, 1.43 percent fraud, and corrected model results after removing columns that reveal the label." />
+  <meta property="og:url" content="https://pcboss.me/projects/transaction-fraud-analysis/" />
+  <meta property="og:image" content="https://pcboss.me/projects/transaction-fraud-analysis/figures/04_model_comparison_corrected.png" />
+  <meta property="og:image:alt" content="Bar chart of corrected test scores for logistic regression, decision tree, and random forest. Logistic regression has the highest ROC-AUC, while F1 and PR-AUC are low for all three models." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Machine Learning for Transaction Fraud Analysis | Francis Amoah Nuako" />
+  <meta name="twitter:description" content="A leakage and class imbalance study on a public payment fraud file: 39,221 records, 1.43 percent fraud, and corrected model results after removing columns that reveal the label." />
+  <meta name="twitter:url" content="https://pcboss.me/projects/transaction-fraud-analysis/" />
+  <meta name="twitter:image" content="https://pcboss.me/projects/transaction-fraud-analysis/figures/04_model_comparison_corrected.png" />
+  <meta name="twitter:image:alt" content="Bar chart of corrected test scores for logistic regression, decision tree, and random forest. Logistic regression has the highest ROC-AUC, while F1 and PR-AUC are low for all three models." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Machine Learning for Transaction Fraud Analysis",
+    "description": "A data leakage and class imbalance study with baseline classifiers on a public payment fraud file.",
+    "url": "https://pcboss.me/projects/transaction-fraud-analysis/",
+    "author": {
+      "@type": "Person",
+      "name": "Francis Amoah Nuako",
+      "url": "https://pcboss.me"
+    },
+    "isBasedOn": "https://www.kaggle.com/datasets/younusmohamed/payment-fraud-empowering-financial-security"
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="shell nav-row">
+      <a href="/" class="brand" aria-label="Francis Amoah Nuako, home"><span class="brand-mark">F<span>.</span></span><span class="brand-name">FRANCIS AMOAH NUAKO</span></a>
+      <nav class="site-nav" aria-label="Main navigation" id="siteNav">
+        <a href="/#about">About</a>
+        <a href="/#work">Projects</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+      <a class="nav-contact" href="mailto:francisnuako@gmail.com">Let's connect <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="main" class="case">
+    <section class="section case-hero" aria-labelledby="project-title">
+      <div class="shell">
+        <p class="overline case-kicker">Independent project · Leakage and data quality study</p>
+        <h1 id="project-title">Machine Learning for Transaction Fraud Analysis</h1>
+        <p class="case-lead">An audit first study of payment fraud classification. The dataset was checked for target leakage and duplicate rows before any model result was trusted. Three baseline classifiers were then compared on features that do not reveal the label.</p>
+        <p class="case-note">The file is not described here as verified real world financial transactions. Its provenance is weak, and the fraud rows follow exact rules. The corrected models are baseline results on this file. They are not production ready and they do not show real world fraud detection performance.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/transaction-fraud-analysis-source.zip">Download source code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="/#work">Back to projects</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" aria-label="Headline measurements">
+      <div class="stat-grid">
+        <div class="stat"><strong>39,221</strong><span>Original payment records</span></div>
+        <div class="stat"><strong>560</strong><span>Fraudulent records, 1.43 percent</span></div>
+        <div class="stat"><strong>3,033</strong><span>Duplicate rows identified</span></div>
+        <div class="stat"><strong>36,188</strong><span>Unique rows after deduplication</span></div>
+        <div class="stat"><strong>3</strong><span>Classification models evaluated</span></div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="overview-heading">
+      <div class="shell">
+        <h2 id="overview-heading">Overview</h2>
+        <p>The original file has 39,221 rows and 8 columns: 7 predictors and a binary label. There are 38,661 legitimate records (98.57 percent) and 560 fraud records (1.43 percent). At that prevalence, accuracy alone is a poor guide. A rule that labels every row legitimate scores about 98.57 percent accuracy and detects no fraud.</p>
+        <p>The first run, using all seven predictors, gives the decision tree and random forest perfect scores. Those scores are an artefact. Two columns separate the classes by construction, and many rows are exact copies. After those columns are removed and duplicates are dropped before splitting, no model performs usefully at the default threshold. That corrected result is the result reported on this page.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="source-heading">
+      <div class="shell">
+        <h2 id="source-heading">Dataset source and provenance</h2>
+        <p>The source is the Kaggle dataset <a href="https://www.kaggle.com/datasets/younusmohamed/payment-fraud-empowering-financial-security" target="_blank" rel="noopener noreferrer">Payment Fraud: Empowering Financial Security</a> by Younus Mohamed. The file used is <code>payment_fraud.csv</code>, with 39,221 rows and 8 columns. The Kaggle dataset card states 38,662 rows, which does not match the CSV. The CSV count is used here.</p>
+        <p>Licence statements conflict. The Kaggle page sidebar lists CC BY-NC-SA 4.0, while the README inside the download lists CC BY-SA 4.0. This project follows the more restrictive CC BY-NC-SA 4.0 terms and gives attribution to the dataset author. The raw CSV is not redistributed on this site or in the source download.</p>
+        <p>The uploader does not document the data as synthetic and gives no collection method or citation. The file shows strong signs of artificial generation or augmentation: fraud rows follow exact rules, the local time field takes only 25 distinct values, and many rows are exact duplicates. It should not be described as real transaction data. The reference repository that pointed to this dataset has no licence file, so none of its code was copied. This implementation was written independently.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="cleaning-heading">
+      <div class="shell">
+        <h2 id="cleaning-heading">Preprocessing and cleaning</h2>
+        <ul>
+          <li>Exact duplicate rows were counted and, in the corrected run, dropped before the train and test split. There are 3,033 duplicate rows beyond the first copy, leaving 36,188 unique rows.</li>
+          <li>Of the 560 fraud rows, 164 are exact copies of other fraud rows. The corrected run therefore models 396 unique fraud rows.</li>
+          <li>Missing values are limited. Category is missing in 95 rows and isWeekend is missing in 560 rows. All other columns have no missing values.</li>
+          <li>Imputation, one hot encoding, and scaling are fitted inside scikit-learn pipelines on training data only.</li>
+          <li>The split is stratified 80/20 with <code>random_state=42</code>. Each model uses <code>class_weight</code> set to balanced because fraud is only 1.43 percent of rows. The decision threshold is the default 0.5. No hyperparameter tuning was done.</li>
+        </ul>
+        <p>The reference notebook had separate method problems: the scaler was fitted on the full dataset before the split, one encoder object was reused, and missing values were filled before splitting. Those issues are secondary here. Even with a clean pipeline, the tree models score perfectly because the leakage is in the columns themselves.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="eda-heading">
+      <div class="shell">
+        <h2 id="eda-heading">Exploratory analysis and class imbalance</h2>
+        <p>Fraud is rare in this file: 560 of 39,221 records. Precision, recall, F1, ROC-AUC, and PR-AUC are therefore reported together. PR-AUC is low in the corrected run, which is expected at low prevalence and also reflects weak ranking.</p>
+        <p>The transaction pattern charts describe this file only. Fraud rates by payment method are close: 1.46 percent for credit card, 1.39 percent for PayPal, and 1.10 percent for store credit. By category, the missing category group has a fraud rate of 8.42 percent, while shopping, electronics, and food are each near 1.4 percent. There is no transaction amount, no merchant or account history, and no time ordering in this file.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="leakage-heading">
+      <div class="shell">
+        <h2 id="leakage-heading">Data leakage investigation</h2>
+        <ul>
+          <li><code>isWeekend</code> is missing for every fraud row and for no legitimate row. Its missingness indicator alone perfectly encodes the target.</li>
+          <li><code>accountAgeDays</code> equals 1 for every fraud row, while the minimum for legitimate rows is 2. A single split on this column separates the classes perfectly.</li>
+          <li>Exact duplicates create a second problem. A random split can place copies of the same row in both train and test sets, which flatters the model.</li>
+          <li><code>paymentMethodAgeDays</code> is below 1 day for every fraud row but also for many legitimate rows. It is kept in the corrected run and removed in a sensitivity run, because it may also be part of how the fraud rows were generated.</li>
+        </ul>
+        <h3>As found run, diagnostic only</h3>
+        <p>With all seven predictors and no deduplication, the decision tree and random forest score 1.0000 on accuracy, precision, recall, F1, ROC-AUC, and PR-AUC. Logistic regression scores ROC-AUC 0.9876 and PR-AUC 0.4244, with recall of 1.0000 and precision of 0.1313. The perfect tree scores are misleading. They show that the models can read columns that reveal the label. They are not evidence of real world fraud detection performance and they should not be quoted as model performance.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="results-heading">
+      <div class="shell">
+        <h2 id="results-heading">Corrected model performance</h2>
+        <p>The corrected run removes <code>accountAgeDays</code> and <code>isWeekend</code> and drops exact duplicates before splitting. It models 36,188 rows, with 28,950 training rows and 7,238 test rows. The test set has 79 fraud records and 7,159 legitimate records.</p>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <caption class="case-note">Corrected held out test results from results.json. TN, FP, FN, and TP are counts on the 7,238 test rows.</caption>
+            <thead>
+              <tr><th scope="col">Model</th><th scope="col">Accuracy</th><th scope="col">Precision</th><th scope="col">Recall</th><th scope="col">F1</th><th scope="col">ROC-AUC</th><th scope="col">PR-AUC</th><th scope="col">TN</th><th scope="col">FP</th><th scope="col">FN</th><th scope="col">TP</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Logistic Regression</td><td>0.6169</td><td>0.0220</td><td>0.7848</td><td>0.0428</td><td>0.8058</td><td>0.0740</td><td>4,403</td><td>2,756</td><td>17</td><td>62</td></tr>
+              <tr><td>Decision Tree</td><td>0.8962</td><td>0.0130</td><td>0.1139</td><td>0.0234</td><td>0.4704</td><td>0.0271</td><td>6,478</td><td>681</td><td>70</td><td>9</td></tr>
+              <tr><td>Random Forest</td><td>0.9436</td><td>0.0030</td><td>0.0127</td><td>0.0049</td><td>0.5216</td><td>0.0104</td><td>6,829</td><td>330</td><td>78</td><td>1</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>Logistic regression ranks cases better than the trees on ROC-AUC (0.8058), but its precision at the default threshold is 0.0220. Most of its fraud alerts are false alarms: 2,756 false positives against 62 true positives. The decision tree and random forest rank cases close to chance in the corrected run, with ROC-AUC of 0.4704 and 0.5216. The random forest finds only 1 of the 79 fraud records at the default threshold. The best corrected F1 score is 0.0428.</p>
+        <h3>Sensitivity without paymentMethodAgeDays</h3>
+        <p>Removing <code>paymentMethodAgeDays</code> as well lowers logistic regression ROC-AUC from 0.8058 to 0.6477 and PR-AUC from 0.0740 to 0.0304. Decision tree ROC-AUC falls to 0.4480 and random forest ROC-AUC falls to 0.4340. The remaining signal therefore depends heavily on <code>paymentMethodAgeDays</code>. In the corrected run the random forest still gives that column the highest importance, at 0.580, followed by local time at 0.293. Importance alone is not evidence of useful performance, since the forest ranking is close to chance.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="charts-heading">
+      <div class="shell">
+        <h2 id="charts-heading">Visualizations</h2>
+        <p>These seven figures were generated by the analysis. The model charts in this section show the corrected run, unless the caption says otherwise.</p>
+        <div class="figure-list">
+          <figure>
+            <img src="figures/01_class_distribution.png" width="1400" height="900" alt="Bar chart of class distribution. Legitimate records total 38,661, or 98.57 percent. Fraud records total 560, or 1.43 percent, and the fraud bar is barely visible." />
+            <figcaption>Class distribution. Fraud is 560 of 39,221 records (1.43 percent). A model that labels every row legitimate would score about 98.57 percent accuracy and detect no fraud.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/02_leakage_diagnostic.png" width="2000" height="840" alt="Two charts. The left chart shows account age by class, with fraud always at 1 day. The right chart shows the weekend flag missing for 100 percent of fraud rows and 0 percent of legitimate rows." />
+            <figcaption>Leakage diagnostic. Account age is always 1 day for fraud, and the weekend flag is missing for every fraud row and no legitimate row. Either pattern can reveal the label.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/03_transaction_patterns.png" width="2200" height="1600" alt="Four charts of transaction patterns in this file: local transaction time by class, payment method age by class, fraud rate by payment method, and fraud rate by category. The missing category group has the highest fraud rate." />
+            <figcaption>Transaction patterns in this file. Fraud rates by payment method are close, from 1.10 to 1.46 percent. The missing category group is higher, at 8.42 percent. These patterns describe the file, not a real payment network.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/04_model_comparison_corrected.png" width="1800" height="1000" alt="Bar chart of corrected test F1, ROC-AUC, and PR-AUC by model. Logistic regression has ROC-AUC 0.806. Decision tree and random forest are near 0.5. All F1 and PR-AUC bars are low." />
+            <figcaption>Corrected model comparison on the test set. Logistic regression has the highest ROC-AUC, at 0.8058. The tree models are near chance, and every F1 and PR-AUC value is low.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/05_feature_importance.png" width="1600" height="1000" alt="Horizontal bar chart of corrected random forest feature importance. Payment method age is first at about 0.58, local time is second at about 0.29, and number of items is third. Category and payment method bars are small." />
+            <figcaption>Corrected random forest importance. Payment method age ranks first (0.580), then local time (0.293). The forest still ranks cases close to chance, so this ordering is not evidence of useful detection.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/06_confusion_matrices.png" width="2546" height="861" alt="Three confusion matrices for the corrected test set. Logistic regression has many false positives. Decision tree misses 70 of 79 fraud records. Random forest misses 78 of 79 and finds 1." />
+            <figcaption>Corrected confusion matrices on 7,238 test rows. Logistic regression flags 2,756 legitimate rows as fraud. The random forest finds 1 of the 79 fraud records at the default threshold.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/07_roc_pr_curves.png" width="2200" height="960" alt="ROC and precision recall curves for the corrected run. Logistic regression is above the chance line on the ROC chart. Decision tree and random forest stay near the diagonal. Precision falls quickly on the precision recall chart." />
+            <figcaption>Corrected ROC and precision recall curves. Logistic regression ranks better than chance (ROC-AUC 0.8058, PR-AUC 0.0740). The tree models stay near chance, and precision is low across recall levels.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="limits-heading">
+      <div class="shell">
+        <h2 id="limits-heading">Limitations and conclusions</h2>
+        <ul>
+          <li>Provenance is weak: no documented collection method, no citation, a row count that does not match the dataset card, and inconsistent licence statements on the Kaggle page.</li>
+          <li>The fraud rows appear to have been generated by simple rules, so model scores do not transfer to real payment systems.</li>
+          <li>Only seven predictors are available. There is no transaction amount, no merchant or account history, and no time ordering, so no temporal validation was possible.</li>
+          <li>A single stratified split was used. Results would vary with other splits. No hyperparameter tuning was done, by design, to keep the comparison simple.</li>
+          <li>The corrected run should be read as a leakage and data quality study with baseline models, not as a deployable fraud detector.</li>
+        </ul>
+        <p>The value of this project is the audit. Perfect scores were a warning sign, not a result. Removing two columns that reveal the label and dropping duplicate rows changed the decision tree and random forest from perfect scores to near chance ranking. What signal remains depends heavily on one column, <code>paymentMethodAgeDays</code>, which may itself be part of how the fraud rows were generated. On this evidence, the file cannot support claims about detecting real payment fraud.</p>
+        <p>The downloadable archive contains the Python implementation, tests, requirements, documentation, figures, and machine readable results. It does not contain the raw transaction CSV. Dataset attribution and the licence note above apply to reuse of the data and figures.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/transaction-fraud-analysis-source.zip">Download source code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="https://www.kaggle.com/datasets/younusmohamed/payment-fraud-empowering-financial-security" target="_blank" rel="noopener noreferrer">Dataset source <span aria-hidden="true">↗</span></a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <a class="footer-brand" href="/">F<span>.</span></a>
+      <span>© <span id="year">2026</span> Francis Amoah Nuako</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+  <script src="/script.js" defer></script>
+</body>
+</html>
