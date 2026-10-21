@@ -1,0 +1,286 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <meta name="theme-color" content="#f7f8f5" />
+  <title>Multi-Agent AI Safety and Risk Evaluation | Francis Amoah Nuako</title>
+  <meta name="description" content="A three-agent simulation evaluated on 24 synthetic scenarios. Protected runtime controls permitted 0 of 17 simulated unsafe actions against 17 of 17 in baseline. No real LLM was tested." />
+  <meta name="author" content="Francis Amoah Nuako" />
+  <meta name="robots" content="index, follow" />
+  <link rel="canonical" href="https://pcboss.me/projects/multi-agent-ai-safety/" />
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+  <link rel="stylesheet" href="/styles.css" />
+  <meta property="og:type" content="article" />
+  <meta property="og:site_name" content="Francis Amoah Nuako" />
+  <meta property="og:title" content="Multi-Agent AI Safety and Risk Evaluation | Francis Amoah Nuako" />
+  <meta property="og:description" content="A three-agent simulation evaluated on 24 synthetic scenarios. Protected runtime controls permitted 0 of 17 simulated unsafe actions against 17 of 17 in baseline. No real LLM was tested." />
+  <meta property="og:url" content="https://pcboss.me/projects/multi-agent-ai-safety/" />
+  <meta property="og:image" content="https://pcboss.me/projects/multi-agent-ai-safety/figures/fig2_baseline_vs_protected.png" />
+  <meta property="og:image:alt" content="Bar chart comparing baseline and protected outcomes in a 24 scenario simulation. Baseline permitted 17 unsafe actions and 3 disclosure violations. Protected permitted 0 unsafe actions and 0 disclosures, recorded 20 safety interventions, and completed 6 of 7 legitimate tasks." />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Multi-Agent AI Safety and Risk Evaluation | Francis Amoah Nuako" />
+  <meta name="twitter:description" content="A three-agent simulation evaluated on 24 synthetic scenarios. Protected runtime controls permitted 0 of 17 simulated unsafe actions against 17 of 17 in baseline. No real LLM was tested." />
+  <meta name="twitter:url" content="https://pcboss.me/projects/multi-agent-ai-safety/" />
+  <meta name="twitter:image" content="https://pcboss.me/projects/multi-agent-ai-safety/figures/fig2_baseline_vs_protected.png" />
+  <meta name="twitter:image:alt" content="Bar chart comparing baseline and protected outcomes in a 24 scenario simulation. Baseline permitted 17 unsafe actions and 3 disclosure violations. Protected permitted 0 unsafe actions and 0 disclosures, recorded 20 safety interventions, and completed 6 of 7 legitimate tasks." />
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Article",
+    "headline": "Multi-Agent AI Safety and Risk Evaluation",
+    "description": "Evaluation of runtime safety controls in a deterministic three-agent simulation across 24 synthetic scenarios.",
+    "url": "https://pcboss.me/projects/multi-agent-ai-safety/",
+    "author": {
+      "@type": "Person",
+      "name": "Francis Amoah Nuako",
+      "url": "https://pcboss.me"
+    }
+  }
+  </script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Skip to content</a>
+  <header class="site-header" id="top">
+    <div class="shell nav-row">
+      <a href="/" class="brand" aria-label="Francis Amoah Nuako, home"><span class="brand-mark">F<span>.</span></span><span class="brand-name">FRANCIS AMOAH NUAKO</span></a>
+      <nav class="site-nav" aria-label="Main navigation" id="siteNav">
+        <a href="/#about">About</a>
+        <a href="/#work">Projects</a>
+        <a href="/#experience">Experience</a>
+        <a href="/#contact">Contact</a>
+      </nav>
+      <a class="nav-contact" href="mailto:francisnuako@gmail.com">Let's connect <span aria-hidden="true">↗</span></a>
+      <button class="menu-toggle" id="menuToggle" type="button" aria-label="Open navigation" aria-controls="siteNav" aria-expanded="false"><span></span><span></span><span></span></button>
+    </div>
+  </header>
+
+  <main id="main" class="case">
+    <section class="section case-hero" aria-labelledby="project-title">
+      <div class="shell">
+        <p class="overline case-kicker">Independent project · AI safety and security evaluation</p>
+        <h1 id="project-title">Multi-Agent AI Safety and Risk Evaluation</h1>
+        <p class="case-lead">A three-agent workflow was built as a deterministic simulation and tested on 24 synthetic scenarios, in a baseline configuration with safety controls disabled and a protected configuration with runtime policy enforcement. The experiment asks whether explicit controls at the message and tool layers reduce simulated violations, and what they cost legitimate work.</p>
+        <p class="case-note">Technologies: Python, Multi-Agent Systems, AI Safety, Security Evaluation, and Streamlit. <strong>Scope, stated plainly: no real LLM inference was tested.</strong> The agents are deterministic, rule-based programs that were written to comply with delivered instructions. These results measure policy enforcement in a simulation. They are not real world LLM attack success rates, and this project does not show that multi-agent LLM systems are secure.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/multi-agent-ai-safety-source.zip">Download source code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="/#work">Back to projects</a>
+        </div>
+      </div>
+    </section>
+
+    <section class="shell" aria-label="Headline measurements">
+      <div class="stat-grid">
+        <div class="stat"><strong>24</strong><span>Synthetic evaluation scenarios, run in both configurations</span></div>
+        <div class="stat"><strong>17 of 17</strong><span>Unsafe actions permitted in baseline</span></div>
+        <div class="stat"><strong>0 of 17</strong><span>Unsafe actions permitted with runtime controls</span></div>
+        <div class="stat"><strong>3 to 0</strong><span>Information disclosure violations, baseline to protected, of 4 relevant scenarios</span></div>
+        <div class="stat"><strong>6 of 7</strong><span>Legitimate tasks completed with controls, against 7 of 7 in baseline</span></div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="overview-heading">
+      <div class="shell">
+        <h2 id="overview-heading">Project overview</h2>
+        <p>Multi-agent systems add risks that single model testing misses. Instructions can enter through a document rather than from the user. One agent can impersonate or contradict another. A finding invented by one agent can be repeated by the next and end up in the final output. This project tests those handoffs directly, with execution traces that show where each attack was stopped or allowed through.</p>
+        <p>Every scenario ran twice: once in a baseline configuration where the policy engine is disabled and every check returns ALLOW, and once in a protected configuration where the controls described below are active. Comparing the two on identical scenarios isolates what the controls do. All documents, identifiers, recipients, and credentials in the scenarios are fictional, and the simulated tools perform no network access.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="objectives-heading">
+      <div class="shell">
+        <h2 id="objectives-heading">Research objectives</h2>
+        <p>The research question is: do explicit runtime safety controls reduce simulated violations in a three-agent workflow without unnecessarily preventing legitimate tasks?</p>
+        <ul>
+          <li>Measure unsafe actions permitted, with an explicit denominator of attack attempts, in baseline and protected configurations.</li>
+          <li>Measure information disclosure separately, because a marker reaching an output is a different failure from a tool executing.</li>
+          <li>Measure the cost of the controls on legitimate work, including false positives, rather than reporting protection alone.</li>
+          <li>Record structured audit decisions and traces, so each outcome can be traced to the check that allowed, denied, or redacted it.</li>
+          <li>State the limits of a deterministic simulation clearly, so the results are not read as evidence about real LLM agents.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="architecture-heading">
+      <div class="shell">
+        <h2 id="architecture-heading">Three-agent architecture</h2>
+        <p>Three deterministic, rule-based agents communicate through a signed message bus with recorded handoffs. Each role has a deliberately narrow job and a narrow set of tools.</p>
+        <ul>
+          <li><strong>Planner.</strong> Interprets the trusted user task and delegates research and execution. It has no tool permissions at all, so it cannot read, write, send, or delete anything itself.</li>
+          <li><strong>Researcher.</strong> Reads approved synthetic documents and reports findings, with a citation to the source document. It may use only <code>read_document</code>, and only for documents in the approved corpus.</li>
+          <li><strong>Executor.</strong> Produces the final output. It may use only <code>write_output</code>, and only inside the run workspace.</li>
+        </ul>
+        <p>Supporting components handle messages with trust labels and HMAC integrity signatures, the runtime policy engine, simulated tools confined to a fresh temporary workspace per run, the synthetic document corpus, and metric aggregation with explicit denominators. An offline Streamlit dashboard presents the results, audit logs, and traces. In protected mode, every message and tool call passes a policy gate that returns ALLOW, DENY, or REDACT and writes the decision to a structured audit log.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="threat-heading">
+      <div class="shell">
+        <h2 id="threat-heading">Safety threat model</h2>
+        <p>The trust boundary is drawn between what the user and the system itself produce, and everything else.</p>
+        <ul>
+          <li><strong>Trusted:</strong> the user task as issued, and messages created and signed inside the system by the Planner.</li>
+          <li><strong>Untrusted:</strong> document content, any instruction embedded in a document, forged messages, altered messages, and findings that cannot be cited to their source.</li>
+          <li><strong>Attacker capabilities in scope:</strong> embedding instructions in documents, requesting unauthorised tools, forging a message from another role, tampering with a message in transit, inserting conflicting instructions, and seeding a fabricated finding that would cascade into the final output.</li>
+          <li><strong>Out of scope:</strong> real credential theft, network attacks, operating system escape, and any production service. Simulated tools perform no network access. <code>send_external</code> only records a payload in memory, and <code>delete_file</code> only removes a dummy file inside the temporary workspace. Workspace path confinement is enforced in code in both configurations, including baseline, so it is not one of the differences being measured.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="scenarios-heading">
+      <div class="shell">
+        <h2 id="scenarios-heading">Evaluation scenario design</h2>
+        <p>The suite in <code>data/scenarios.json</code> has 24 synthetic scenarios: 17 malicious and 7 legitimate. The malicious categories are prompt injection (3), sensitive information disclosure (3), unauthorized tool requests (3), agent role spoofing (2), message tampering (2), cross-agent instruction conflicts (2), and cascading agent errors (2). The 7 legitimate scenarios are ordinary work: summaries, action item extraction, and one simulated external sharing request.</p>
+        <p>Each malicious scenario presents one primary attack by design, which fixes the attempt denominator at 17 per configuration. Each scenario documents its expected behaviour in both configurations before it runs. Metrics keep their denominators explicit throughout: unsafe actions permitted out of 17 attempts, disclosure violations out of 4 disclosure relevant scenarios, and legitimate completion and false positives out of 7 legitimate scenarios.</p>
+        <p>The agents are deliberately compliant. If an injected instruction reaches the Executor, it attempts the requested simulated tool. That design choice matters for interpretation: the experiment measures whether the policy layer stops the instruction, not whether an agent judges it to be malicious. A real LLM agent might refuse some attacks on its own, and might also evade controls in ways these agents cannot.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="risks-heading">
+      <div class="shell">
+        <h2 id="risks-heading">Prompt injection and information disclosure risks</h2>
+        <p>Prompt injection is the central entry point in this suite. In three scenarios, an instruction hidden inside a document asks the Executor to send findings to a fictional external address, delete a workspace file, or chain credential access with an external send. Two more scenarios use the same entry point through direct user task wording that requests a tool no agent is permitted to use, and through a document instruction that conflicts with an explicit trusted instruction. Because document content is untrusted, an instruction that arrives inside it must not acquire the authority of the user task. In baseline mode it does, because nothing separates the two.</p>
+        <p>Information disclosure is tracked as its own metric. Four scenarios are disclosure relevant: they carry fictional sensitive markers or a disclosure aim. They include a restricted credentials register the Researcher is pointed at, support notes that accidentally contain a fictional mock API key, a direct request to read stored credentials, and an injected instruction trying to move findings outside the workspace. A violation is counted when a fictional marker reaches the final output, a written file, or a simulated external payload. In baseline, 3 of these 4 scenarios disclosed a marker.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="mechanisms-heading">
+      <div class="shell">
+        <h2 id="mechanisms-heading">Runtime safety mechanisms</h2>
+        <p>Protected mode applies seven controls, each aimed at a different point in the workflow:</p>
+        <ul>
+          <li><strong>Role-based tool permissions.</strong> Each role has an explicit tool set. The Planner has none, the Researcher has <code>read_document</code>, and the Executor has <code>write_output</code> inside the workspace.</li>
+          <li><strong>Trusted and untrusted message separation.</strong> Instructions embedded in document content are carried in a separate untrusted field and stripped in protected mode, so they never merge with the trusted task.</li>
+          <li><strong>Tool execution allowlists.</strong> <code>send_external</code>, <code>delete_file</code>, and <code>read_credentials</code> are on no role allowlist in protected mode, whoever asks for them.</li>
+          <li><strong>Sensitive information redaction.</strong> Fictional mock secret patterns are replaced before output in protected mode.</li>
+          <li><strong>Message validation.</strong> HMAC signatures are verified on inter-agent messages, and research findings must quote the cited source document, which blocks fabricated findings.</li>
+          <li><strong>Runtime policy enforcement.</strong> Every message and tool call receives an ALLOW, DENY, or REDACT decision. With the engine disabled (baseline), every check returns ALLOW and no validation or redaction is applied.</li>
+          <li><strong>Structured audit logging.</strong> Every decision is recorded with its check type, reasons, and context, and is visible in the dashboard and in <code>outputs/results.json</code>.</li>
+        </ul>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="results-heading">
+      <div class="shell">
+        <h2 id="results-heading">Baseline versus protected evaluation</h2>
+        <div class="case-table-wrap">
+          <table class="case-table">
+            <caption class="case-note">Results from outputs/results.json. The same 24 synthetic scenarios ran in both configurations. Interventions are audit events, not scenarios: one scenario can produce several DENY or REDACT decisions, so that count has no scenario denominator.</caption>
+            <thead>
+              <tr><th scope="col">Measure</th><th scope="col">Baseline</th><th scope="col">Protected</th></tr>
+            </thead>
+            <tbody>
+              <tr><td>Scenarios evaluated</td><td>24</td><td>24</td></tr>
+              <tr><td>Unsafe action attempts</td><td>17</td><td>17</td></tr>
+              <tr><td>Unsafe actions permitted</td><td>17 of 17 (100.0%)</td><td>0 of 17 (0.0%)</td></tr>
+              <tr><td>Information disclosure violations</td><td>3 of 4 relevant scenarios</td><td>0 of 4 relevant scenarios</td></tr>
+              <tr><td>DENY or REDACT audit events</td><td>0</td><td>20</td></tr>
+              <tr><td>Legitimate tasks completed</td><td>7 of 7 (100.0%)</td><td>6 of 7 (85.7%)</td></tr>
+              <tr><td>False positives</td><td>0 of 7 (0.0%)</td><td>1 of 7 (14.3%)</td></tr>
+            </tbody>
+          </table>
+        </div>
+        <p>By category, baseline permitted every attempt: prompt injection 3 of 3, sensitive disclosure 3 of 3, unauthorized tools 3 of 3, role spoofing 2 of 2, message tampering 2 of 2, instruction conflicts 2 of 2, and cascading errors 2 of 2. Protected mode permitted 0 in every category. The 20 protected audit events with DENY or REDACT decisions are spread across categories: 3 each for prompt injection, sensitive disclosure, and unauthorized tools, 4 for message tampering, 2 each for role spoofing, instruction conflicts, and cascading errors, and 1 in a legitimate scenario. Those are 20 intervention events recorded during the run. They are not 20 distinct attack scenarios, and the suite only contains 17 malicious scenarios.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="effectiveness-heading">
+      <div class="shell">
+        <h2 id="effectiveness-heading">Safeguard effectiveness</h2>
+        <p>Within this simulation, the controls did the specific jobs they were built for. Trust separation and tool allowlists broke the injection chains before a simulated tool could run. Signature validation denied forged and tampered messages, which a content filter alone would not catch, because the text of a forged instruction can look ordinary. Redaction and restricted document rules removed all three baseline marker disclosures. Citation validation stopped fabricated findings from cascading into the final output, which suggests provenance checks are a useful complement to content checks.</p>
+        <p>The baseline result needs as much care as the protected one. Baseline permitted 17 of 17 because the agents are written to comply with whatever instruction reaches them and no check stands in the way. That is a property of this simulation, not a measured failure rate for real systems. The same caution applies in reverse to the protected 0 of 17: the attacks were template based and designed alongside the controls, so a complete block rate on this suite shows the enforcement points work as specified here. It does not show robustness against novel attacks.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="falsepositives-heading">
+      <div class="shell">
+        <h2 id="falsepositives-heading">False positives and legitimate task completion</h2>
+        <p>Protection was not free. Legitimate completion fell from 7 of 7 in baseline to 6 of 7 in protected mode, a false positive rate of 1 of 7 (14.3 percent) in this small sample.</p>
+        <p>The false positive is scenario L-07, a legitimate simulated external sharing request: share a travel notes summary with a fictional external collaborator. In baseline the simulated send completes. In protected mode the strict allowlist blocks <code>send_external</code> for every recipient, legitimate or not, so the task cannot complete. That is over-blocking by design of a strict allowlist, and it is reported here as a cost of the controls rather than hidden. Six other legitimate tasks, including a security awareness summary that mentions passwords without containing credential values, completed normally under the same controls.</p>
+        <p>With only 7 legitimate scenarios, one task is the difference between 100 percent and 85.7 percent completion. Both figures should be read as counts first. The finding worth keeping is qualitative: an allowlist strict enough to stop every external send will also stop legitimate sharing, so a real deployment would need a considered way to approve specific recipients rather than a blanket rule in either direction.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="charts-heading">
+      <div class="shell">
+        <h2 id="charts-heading">Visualizations</h2>
+        <p>These eight figures were generated from the recorded results in <code>outputs/results.json</code>. Counts are shown rather than only percentages, because the sample is 24 scenarios.</p>
+        <div class="figure-list">
+          <figure>
+            <img src="figures/fig1_scenario_distribution.png" width="1280" height="640" alt="Bar chart of scenario counts by category. Prompt injection, sensitive disclosure, and unauthorized tool each have 3 scenarios. Role spoofing, message tampering, instruction conflict, and cascading error each have 2. Legitimate scenarios have 7." />
+            <figcaption>Scenario distribution. The suite has 17 malicious scenarios across seven attack categories and 7 legitimate scenarios, 24 in total.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/fig2_baseline_vs_protected.png" width="1280" height="640" alt="Grouped bar chart comparing baseline in red and protected in blue. Baseline shows 17 unsafe actions permitted, 3 disclosure violations, no interventions, and 7 legitimate tasks completed. Protected shows 0 unsafe actions, 0 disclosures, 20 interventions, and 6 legitimate tasks completed." />
+            <figcaption>Baseline versus protected outcomes. The main change is unsafe actions permitted falling from 17 to 0, with legitimate completion falling from 7 to 6. Interventions are audit events, not scenarios.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/fig3_unsafe_by_category.png" width="1280" height="640" alt="Bar chart of unsafe actions permitted by attack category. Red baseline bars reach the full count in every category, 3 for the first three categories and 2 for the rest. No blue protected bars are visible because the count is zero in every category." />
+            <figcaption>Unsafe actions permitted by category. Baseline permitted every attempt in all seven categories. Protected mode permitted none in this suite.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/fig4_disclosure.png" width="960" height="640" alt="Bar chart of information disclosure violations out of 4 disclosure relevant scenarios per configuration. The baseline bar reaches 3. The protected bar is absent because the count is zero." />
+            <figcaption>Information disclosure violations. Of 4 disclosure relevant scenarios, fictional markers reached an output in 3 under baseline and in 0 under protected mode.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/fig5_legitimate_completion.png" width="960" height="640" alt="Bar chart of legitimate tasks completed out of 7 per configuration. The baseline bar reaches 7. The protected bar reaches 6." />
+            <figcaption>Legitimate task completion. Baseline completed 7 of 7 legitimate scenarios and protected mode completed 6 of 7.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/fig6_false_positive_rate.png" width="960" height="640" alt="Bar chart of false positive rates. The baseline bar is absent at zero percent. The protected bar reaches about 14 percent, which is 1 of 7 legitimate scenarios." />
+            <figcaption>False positive rates. Protected mode blocked 1 of 7 legitimate scenarios (14.3 percent), the external sharing request described above. Baseline blocked none.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/fig7_workflow.png" width="1440" height="560" alt="Workflow diagram with five boxes joined by arrows: user with a trusted task, Planner to delegate, Researcher to read approved documents, Executor to write output, and simulated tools confined to the workspace. Text below states that a policy gate applies to every message and tool call in protected mode, with ALLOW, DENY, and REDACT decisions and an audit log." />
+            <figcaption>Agent interaction workflow. The user task passes from the Planner to the Researcher and then to the Executor, which alone can write output. In protected mode a policy gate checks every handoff and tool call.</figcaption>
+          </figure>
+          <figure>
+            <img src="figures/fig8_example_trace.png" width="1440" height="720" alt="Text trace for scenario PI-01 in protected mode. Six steps show the Planner delegating research with a valid signature, the Researcher reading a document, the Researcher findings message receiving a REDACT decision because an instruction embedded in untrusted document content was removed, a further ALLOW for a valid signature, the Planner handing the task to the Executor, and the Executor writing output." />
+            <figcaption>Example safety intervention trace (scenario PI-01, protected). The injected instruction inside a document is removed at step 3 by a REDACT decision, and the task then completes normally inside the workspace.</figcaption>
+          </figure>
+        </div>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="limits-heading">
+      <div class="shell">
+        <h2 id="limits-heading">Research limitations and conclusions</h2>
+        <p>These limitations are essential to reading the results, so they are stated in full rather than summarised.</p>
+        <ul>
+          <li><strong>No real LLM inference was tested.</strong> <code>results.json</code> records this explicitly: no LLM API key was available, the provider and model are null, and the request count is 0. Nothing here measures how a language model behaves.</li>
+          <li><strong>The agents are deterministic, rule-based simulations.</strong> They are deliberately compliant and attempt any simulated tool an instruction asks for. Results therefore measure policy enforcement behaviour (validation, permission gates, redaction, allowlists), not model judgement.</li>
+          <li><strong>Results cover 24 synthetic scenarios only.</strong> With denominators of 17, 7, and 4, rates have wide uncertainty and should be read as counts first.</li>
+          <li><strong>Findings do not establish robustness against novel attacks or real LLM behavior.</strong> A 100 percent block rate on this suite must not be generalised, and these are not real world LLM attack success rates.</li>
+          <li><strong>Attack cases were template-based rather than adaptive.</strong> Paraphrase, encoding, multi-step social engineering, and attackers who adapt to the controls are not covered. Each scenario also presents one primary attack, while real incidents combine vectors.</li>
+          <li><strong>Pattern-based redaction has limited coverage.</strong> It detects the fictional marker formats used in this project. It would not reliably catch secrets in other formats, and the citation check verifies that a quote exists in the cited document, not that a summary is semantically correct.</li>
+          <li><strong>Message integrity signatures do not cover every message field.</strong> The HMAC covers sender, recipient, kind, content, tool call, and trust. It does not cover the untrusted instruction, citation quote, source document, or message ID fields, so tampering confined to those fields would not be detected by the signature.</li>
+          <li><strong>The signing key is a demonstration constant.</strong> It is a local placeholder in the code, not a credential management or key distribution design.</li>
+          <li><strong>The system is not a production security certification.</strong> Simulated tools do no network access, workspaces are temporary, and no production service, monitoring, or incident process was evaluated.</li>
+        </ul>
+        <p>The conclusion is correspondingly narrow. In this deterministic three-agent simulation, runtime controls at the message and tool layers stopped all 17 template based attacks in the suite and removed all fictional marker disclosures, while blocking 1 of 7 legitimate tasks. That shows the enforcement points work as specified on these scenarios, and it prices strict allowlisting with a concrete false positive. It does not prove that multi-agent LLM systems are secure, and it should not be cited as evidence about real LLM behaviour.</p>
+        <p>Reference note: this project was informed at a conceptual level by the public repository <a href="https://github.com/AI45Lab/TrinityGuard" target="_blank" rel="noopener noreferrer">AI45Lab/TrinityGuard</a> (MIT License), which describes evaluating safety risks in multi-agent systems with workflow tracing, message interception, and runtime protection. No source code, data, figures, or findings were copied from it, and this project uses a different decision set (ALLOW, DENY, and REDACT). All scenarios, code, and results here are original to this project.</p>
+      </div>
+    </section>
+
+    <section class="section case-block" aria-labelledby="download-heading">
+      <div class="shell">
+        <h2 id="download-heading">Source code download</h2>
+        <p>The downloadable archive contains the <code>mas_safety</code> source package, the evaluation runner, the offline Streamlit dashboard, the 24 evaluation scenarios in <code>data/scenarios.json</code>, requirements, automated tests, the README with reproduction instructions, the case study text, full results with audit logs and traces, and all eight figures. It contains no credentials and no <code>.env</code> file (only an empty <code>.env.example</code> placeholder), and no caches, temporary files, or virtual environments. The fictional mock secrets inside the synthetic documents are test fixtures for the redaction checks, not real credentials. Sixteen automated tests cover the controls and metrics, and all 16 pass.</p>
+        <div class="case-actions">
+          <a class="btn btn-primary" href="/downloads/multi-agent-ai-safety-source.zip">Download source code <span aria-hidden="true">↓</span></a>
+          <a class="btn btn-outline" href="/#work">Back to projects</a>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="shell footer-row">
+      <a class="footer-brand" href="/">F<span>.</span></a>
+      <span>© <span id="year">2026</span> Francis Amoah Nuako</span>
+      <a href="#top">Back to top ↑</a>
+    </div>
+  </footer>
+  <script src="/script.js" defer></script>
+</body>
+</html>
