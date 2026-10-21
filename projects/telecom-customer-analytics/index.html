@@ -44,7 +44,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header" id="top">
     <div class="shell nav-row">
-      <a href="/" class="brand" aria-label="Francis Amoah Nuako — home"><span class="brand-mark">F<span>.</span></span><span class="brand-name">FRANCIS AMOAH NUAKO</span></a>
+      <a href="/" class="brand" aria-label="Francis Amoah Nuako, home"><span class="brand-mark">F<span>.</span></span><span class="brand-name">FRANCIS AMOAH NUAKO</span></a>
       <nav class="site-nav" aria-label="Main navigation" id="siteNav">
         <a href="/#about">About</a>
         <a href="/#work">Projects</a>
@@ -149,18 +149,18 @@
           </table>
         </div>
 
-        <h3>Weeks 22–35</h3>
+        <h3>Weeks 22-35</h3>
         <p>The file contains fourteen consecutive week numbers, 22 through 35. Weekly revenue moves from 1,131,490.32 USD in week 22 to 1,609,812.59 USD in week 35, a difference of 478,322.27 USD, or 42.3 percent. The path is not a straight line. Week 25 falls to 1,204,058.43 USD after week 24, and the highest week is week 34 at 1,644,656.74 USD. Paying customers move from 105,047 in week 22 to 135,274 in week 35.</p>
         <p>Of 143,731 paying customers, 77,741 (54.1 percent) have a revenue row in all fourteen weeks. Only 560 customers appear in a single week. The 42.3 percent comparison is the change from the first observed week to the last, not a fitted growth rate.</p>
 
         <h3>Revenue without a CRM profile</h3>
-        <p>Of the 19,300,750.00 USD, 13,765,352.68 USD (71.3 percent) joins to a CRM profile and 5,535,397.32 USD (28.7 percent) does not. The matched amount comes from 97,351 customers and 1,188,888 transactions. The unmatched amount comes from 46,380 customers and 515,713 transactions. Those 97,351 matched payers are 0.87 percent of the 11,249,351 CRM profiles. The CRM file is much larger than the set of customers who have revenue in weeks 22–35.</p>
+        <p>Of the 19,300,750.00 USD, 13,765,352.68 USD (71.3 percent) joins to a CRM profile and 5,535,397.32 USD (28.7 percent) does not. The matched amount comes from 97,351 customers and 1,188,888 transactions. The unmatched amount comes from 46,380 customers and 515,713 transactions. Those 97,351 matched payers are 0.87 percent of the 11,249,351 CRM profiles. The CRM file is much larger than the set of customers who have revenue in weeks 22-35.</p>
         <p>The 46,380 unmatched paying identifiers do not occur anywhere in the CRM file, either before or after deduplication. Trimming and uppercasing produce no additional matches. All matched and unmatched payers use a 32-character hexadecimal identifier, and the same gap is present in every week from 22 to 35. Unmatched revenue is between 26.7 and 30.1 percent of each week’s revenue. This is a coverage gap between the source tables, not a failure confined to one week and not an effect of removing duplicate CRM rows.</p>
 
         <h3>Matched customer attributes</h3>
         <p>Among matched revenue, prepaid accounts for 13,632,426.46 USD (99.0 percent of matched revenue) from 96,555 customers. Postpaid accounts for 132,926.22 USD from 796 customers. The postpaid average transaction is 12.83 USD, compared with 11.57 USD for prepaid. The postpaid group is small, so that difference describes this extract only.</p>
         <p>Matched revenue by recorded gender is 11,139,751.36 USD for male (78,635 customers), 1,290,843.65 USD for female (9,331 customers), and 1,334,757.67 USD for unknown gender (9,385 customers). Unknown gender is about as large as the female total. In the full CRM table, 1,190,998 profiles (10.6 percent) have unknown gender. Value segment takes one value only, <code>TIER_3</code>, for all 11,249,351 profiles, so segment comparisons are not available. Service status is almost uniform: 11,247,484 profiles are active, 1,866 are suspended, and 1 is deactive.</p>
-        <p>Under the 2026 age assumption, matched revenue is concentrated in midlife bands: 5,366,095.07 USD at ages 35–44 and 3,653,747.71 USD at ages 45–54. Together those two bands are 65.5 percent of matched revenue. Ages 25–34 contribute 1,613,829.42 USD, ages 55–64 contribute 2,051,618.03 USD, and ages 65 and over contribute 1,079,452.45 USD. Under 25 and unknown birth year together contribute 610.00 USD, from four matched customers.</p>
+        <p>Under the 2026 age assumption, matched revenue is concentrated in midlife bands: 5,366,095.07 USD at ages 35-44 and 3,653,747.71 USD at ages 45-54. Together those two bands are 65.5 percent of matched revenue. Ages 25-34 contribute 1,613,829.42 USD, ages 55-64 contribute 2,051,618.03 USD, and ages 65 and over contribute 1,079,452.45 USD. Under 25 and unknown birth year together contribute 610.00 USD, from four matched customers.</p>
 
         <h3>Devices</h3>
         <p>The device table has 2,440,100 rows and 2,381,966 distinct customers. Most of that inventory is not linked to a revenue row. Among revenue, 16,638,613.01 USD (86.2 percent) belongs to 123,687 paying customers with no device row. Another 2,604,466.46 USD belongs to 19,577 customers with exactly one device row. Customers with more than one device row account for 57,670.53 USD and 467 customers.</p>
@@ -175,7 +175,7 @@
         <div class="figure-list">
           <figure>
             <img src="figures/weekly_revenue.png" width="960" height="540" alt="Line chart of revenue in US dollars by week number, from week 22 to week 35, in the local Kaggle CSV extract. Revenue rises overall, dips at week 25, peaks at week 34, and eases slightly in week 35." />
-            <figcaption>Weekly revenue for week numbers 22–35. The series moves from 1,131,490.32 USD in week 22 to 1,609,812.59 USD in week 35, with a fall in week 25 and a peak in week 34.</figcaption>
+            <figcaption>Weekly revenue for week numbers 22-35. The series moves from 1,131,490.32 USD in week 22 to 1,609,812.59 USD in week 35, with a fall in week 25 and a peak in week 34.</figcaption>
           </figure>
           <figure>
             <img src="figures/revenue_by_mobile_type.png" width="960" height="576" alt="Horizontal bar chart of revenue by mobile type in the local Kaggle CSV extract. Prepaid is the longest bar, unmatched revenue is next, and postpaid is a very small bar." />
@@ -183,7 +183,7 @@
           </figure>
           <figure>
             <img src="figures/revenue_by_age_band.png" width="960" height="576" alt="Horizontal bar chart of revenue by age band, using 2026 minus birth year, in the local Kaggle CSV extract. Ages 35 to 44 and the unmatched group are the largest bars." />
-            <figcaption>Revenue by age band, using 2026 minus year of birth. Ages 35–44 and 45–54 hold most matched revenue. Unmatched revenue is plotted separately because those customers have no birth year on a CRM profile.</figcaption>
+            <figcaption>Revenue by age band, using 2026 minus year of birth. Ages 35-44 and 45-54 hold most matched revenue. Unmatched revenue is plotted separately because those customers have no birth year on a CRM profile.</figcaption>
           </figure>
           <figure>
             <img src="figures/revenue_by_device_link.png" width="960" height="576" alt="Horizontal bar chart of revenue by device-link status in the local Kaggle CSV extract. Customers with no device row account for most revenue. One device is much smaller, and multiple devices are barely visible." />

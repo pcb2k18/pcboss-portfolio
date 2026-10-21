@@ -44,7 +44,7 @@
   <a class="skip-link" href="#main">Skip to content</a>
   <header class="site-header" id="top">
     <div class="shell nav-row">
-      <a href="/" class="brand" aria-label="Francis Amoah Nuako — home"><span class="brand-mark">F<span>.</span></span><span class="brand-name">FRANCIS AMOAH NUAKO</span></a>
+      <a href="/" class="brand" aria-label="Francis Amoah Nuako, home"><span class="brand-mark">F<span>.</span></span><span class="brand-name">FRANCIS AMOAH NUAKO</span></a>
       <nav class="site-nav" aria-label="Main navigation" id="siteNav">
         <a href="/#about">About</a>
         <a href="/#work">Projects</a>
@@ -61,7 +61,7 @@
       <div class="shell">
         <p class="overline case-kicker">Independent project · Educational ML evaluation</p>
         <h1 id="project-title">Heart Disease Classification and Model Evaluation</h1>
-        <p class="case-lead">A reproducible comparison of four classical classifiers — Random Forest, Decision Tree, Gaussian Naive Bayes, and Support Vector Machine (SVM) — on the public UCI Cleveland heart-disease dataset. The emphasis is methodological: leakage-safe preprocessing, training-only cross-validation, and a single held-out test evaluation.</p>
+        <p class="case-lead">A reproducible comparison of four classical classifiers, Random Forest, Decision Tree, Gaussian Naive Bayes, and Support Vector Machine (SVM), on the public UCI Cleveland heart-disease dataset. The emphasis is methodological: leakage-safe preprocessing, training-only cross-validation, and a single held-out test evaluation.</p>
         <p class="case-note">This is an educational portfolio project. The results come from one held-out test split of 61 records. The models are not clinically validated diagnostic tools, no external validation was performed, and nothing here is suitable for a medical decision.</p>
         <div class="case-actions">
           <a class="btn btn-primary" href="/downloads/heart-disease-classification-source.zip">Download source code <span aria-hidden="true">↓</span></a>
@@ -83,7 +83,7 @@
     <section class="section case-block" aria-labelledby="overview-heading">
       <div class="shell">
         <h2 id="overview-heading">Overview</h2>
-        <p>The dataset contains 303 records: 164 without disease and 139 with disease (45.9%). The target is the original <code>num</code> value collapsed to binary: 0 for no disease, and 1 for <code>num</code> 1–4, meaning more than 50% diameter narrowing in any major vessel in the source coding. Collapsing the grades discards disease-severity information.</p>
+        <p>The dataset contains 303 records: 164 without disease and 139 with disease (45.9%). The target is the original <code>num</code> value collapsed to binary: 0 for no disease, and 1 for <code>num</code> 1-4, meaning more than 50% diameter narrowing in any major vessel in the source coding. Collapsing the grades discards disease-severity information.</p>
         <p>Four fixed, pre-declared models were compared without tuning on the test set: Random Forest (300 trees), Decision Tree, Gaussian Naive Bayes, and SVM with an RBF kernel (C = 1.0, probability estimates enabled). SVM and Random Forest performed best on both training cross-validation and the held-out test set. With only 61 test records, differences of a few percentage points are within noise.</p>
       </div>
     </section>
@@ -187,7 +187,7 @@
         <ul>
           <li>Single-centre Cleveland cohort collected in the 1980s, with 303 records. It is not representative of modern or diverse populations.</li>
           <li>The held-out test set has 61 records, so test metrics have wide uncertainty. A few records would change the percentages.</li>
-          <li>Collapsing the original disease grades 1–4 into one class discards severity information.</li>
+          <li>Collapsing the original disease grades 1-4 into one class discards severity information.</li>
           <li>The angiographic label and 1980s measurement practices may not match current clinical definitions or devices.</li>
           <li>No external validation, calibration assessment, fairness or subgroup analysis, or prospective evaluation was performed.</li>
           <li>The missing-data mechanism for <code>ca</code> and <code>thal</code> is unknown. Those values are imputed, not observed.</li>
